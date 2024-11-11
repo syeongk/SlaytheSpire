@@ -11,7 +11,7 @@ import java.util.LinkedList;
 public abstract class Character {
 
     private Health health;
-    private Relic relic;
+    private ArrayList<Relic> relics;
     protected LinkedList<Card> deck;
     protected LinkedList<Card> handPile;
     protected LinkedList<Card> drawPile;
