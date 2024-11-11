@@ -9,8 +9,8 @@ public class MainFrame extends JFrame implements ActionListener {
     private JButton start;
     private JButton record;
     private JButton exit;
-    private JPanel cardPanel;
-    private CardLayout cardLayout;
+    static JPanel cardPanel;
+    static CardLayout cardLayout;
 
     public MainFrame(){
         //프레임 설정
@@ -18,7 +18,7 @@ public class MainFrame extends JFrame implements ActionListener {
         setSize(1600, 900);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setResizable(false);
+        //setResizable(false);
 
 
         //패널 전환하기 위한 카드 레이아웃
@@ -91,9 +91,9 @@ public class MainFrame extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == start){
-            JPanel map = new Map();
-            cardPanel.add(map, "Map");
-            cardLayout.show(cardPanel, "Map");
+            JPanel characterSelection = new CharacterSelection();
+            cardPanel.add(characterSelection, "CharacterSelection");
+            cardLayout.show(cardPanel, "CharacterSelection");
         }
     }
 

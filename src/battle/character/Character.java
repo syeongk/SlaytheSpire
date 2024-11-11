@@ -1,11 +1,9 @@
 package battle.character;
 
 import battle.monster.BattleInformation;
-import status.Card;
-import status.Health;
-import status.Potion;
-import status.Relic;
+import status.*;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public abstract class Character {
@@ -51,12 +49,12 @@ public abstract class Character {
     abstract void buff();
     abstract void debuff();
 
-    public Relic getRelic() {
-        return relic;
+    public String getCharacterName() {
+        return characterName;
     }
 
-    public void setRelic(Relic relic) {
-        this.relic = relic;
+    public void setCharacterName(String characterName) {
+        this.characterName = characterName;
     }
 
     public Health getHealth() {
@@ -67,12 +65,28 @@ public abstract class Character {
         this.health = health;
     }
 
-    public LinkedList<Card> getDeck() {
-        return deck;
+    public Money getMoney() {
+        return money;
     }
 
-    public void setDeck(LinkedList<Card> deck) {
-        this.deck = deck;
+    public void setMoney(Money money) {
+        this.money = money;
+    }
+
+    public LinkedList<Potion> getPotions() {
+        return potions;
+    }
+
+    public void setPotions(LinkedList<Potion> potions) {
+        this.potions = potions;
+    }
+
+    public ArrayList<Relic> getRelics() {
+        return relics;
+    }
+
+    public void setRelics(ArrayList<Relic> relics) {
+        this.relics = relics;
     }
 
     public static BattleInformation getBattleInformation() {
@@ -83,6 +97,14 @@ public abstract class Character {
         Character.battleInformation = battleInformation;
     }
 
+    public LinkedList<Card> getDeck() {
+        return deck;
+    }
+
+    public void setDeck(LinkedList<Card> deck) {
+        this.deck = deck;
+    }
+
     public LinkedList<Card> getDiscardPile() {
         return discardPile;
     }
@@ -91,20 +113,20 @@ public abstract class Character {
         this.discardPile = discardPile;
     }
 
-    public LinkedList<Card> getHandPile() {
-        return handPile;
-    }
-
-    public void setHandPile(LinkedList<Card> handPile) {
-        this.handPile = handPile;
-    }
-
     public LinkedList<Card> getDrawPile() {
         return drawPile;
     }
 
     public void setDrawPile(LinkedList<Card> drawPile) {
         this.drawPile = drawPile;
+    }
+
+    public LinkedList<Card> getHandPile() {
+        return handPile;
+    }
+
+    public void setHandPile(LinkedList<Card> handPile) {
+        this.handPile = handPile;
     }
 
     public LinkedList<Card> getExhaustedPile() {
@@ -122,6 +144,5 @@ public abstract class Character {
     public void setEnergy(int energy) {
         this.energy = energy;
     }
-
 
 }

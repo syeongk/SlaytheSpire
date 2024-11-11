@@ -1,23 +1,27 @@
 package status;
 
+import battle.character.Character;
 import javax.swing.*;
+import java.util.LinkedList;
 
 public class StatusBar extends JPanel {
 
-    private Health myHealth = new Health(80, 80);
-    private Money myMoney = new Money();
-    private Deck myDeck = new Deck();
+    private Character character;
+    private Health myHealth;
+    private Money myMoney;
+    private LinkedList<Card> myDeck;
 
-    public StatusBar(){
-        int currentHealth = myHealth.getCurrentHealth();
-        int maxHealth = myHealth.getMaxHealth();
-        int moneyAmount = myMoney.getMoneyAmount();
-        int cardAmount = myDeck.getDeck().size();
+    public StatusBar(Character character){
+        this.character = character;
+        myHealth = this.character.getHealth();
+        myMoney = this.character.getMoney();
+        myDeck = this.character.getDeck();
 
+        //TODO : 데이터베이스에서 닉네임 가져오기
         JLabel nameLabel = new JLabel("seo");
-        JLabel healthLabel = new JLabel(currentHealth + "/" + maxHealth);
-        JLabel moneyLabel = new JLabel(Integer.toString(moneyAmount));
-        JLabel cardAmountLabel = new JLabel(Integer.toString(cardAmount));
+        JLabel healthLabel = new JLabel(myHealth.getCurrentHealth() + "/" + myHealth.getMaxHealth());
+        JLabel moneyLabel = new JLabel(Integer.toString(myMoney.getMoneyAmount()));
+        JLabel cardAmountLabel = new JLabel(Integer.toString(myDeck.size()));
 
         add(nameLabel);
         add(healthLabel);
