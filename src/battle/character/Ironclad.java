@@ -17,7 +17,7 @@ public class Ironclad extends Character{
     @Override
     void initDeck(){
         for(int i=0; i<5; i++){
-            Card strike = new Card("타격", CardType.Attack, "피해를 6 줍니다.", 1);
+            Card strike = new Card("타격", CardType.Attack, "피해를 6 줍니다.", 1);    //카드 객체 생성 : 타격 카드, 타입 공격, 카드 내용, 에너지 
             CardEffect strikeEffect = new CardEffect(DAMAGE, 6);
             strike.getCardEffectList().add(strikeEffect);
             deck.add(strike);
