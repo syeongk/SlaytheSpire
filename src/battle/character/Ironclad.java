@@ -10,7 +10,7 @@ import static status.CardEffectType.*;
 public class Ironclad extends Character{
 
     public Ironclad(){
-        super(80, 80, 3);
+        super("아이언 클래드", 80, 80, 3);
         initDeck();
     }
 
