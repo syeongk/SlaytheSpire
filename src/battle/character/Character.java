@@ -12,20 +12,24 @@ public abstract class Character {
 
     private String selectedCharacter;
     private Health health;
+    private Money money;
+    private LinkedList<Potion> potions;
+    private static BattleInformation battleInformation;
     private ArrayList<Relic> relics;
     protected LinkedList<Card> deck;
     protected LinkedList<Card> handPile;
     protected LinkedList<Card> drawPile;
     protected LinkedList<Card> discardPile;
     protected LinkedList<Card> exhaustedPile;
-    private static BattleInformation battleInformation;
     private int energy;
-    private LinkedList<Potion> potionList;
 
     public Character(String selectedCharacter, int currentHealth, int maxHealth, int energy){
         this.selectedCharacter = selectedCharacter;
         health = new Health(currentHealth, maxHealth);
+        money = new Money();
+        potions = new LinkedList<>();
         battleInformation = new BattleInformation();
+        relics = new ArrayList<>();
         deck = new LinkedList<>();
         handPile = new LinkedList<>();
         drawPile = new LinkedList<>();
