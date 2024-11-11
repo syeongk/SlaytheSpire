@@ -10,6 +10,7 @@ import java.util.LinkedList;
 
 public abstract class Character {
 
+    private String selectedCharacter;
     private Health health;
     private ArrayList<Relic> relics;
     protected LinkedList<Card> deck;
@@ -21,7 +22,8 @@ public abstract class Character {
     private int energy;
     private LinkedList<Potion> potionList;
 
-    public Character(int currentHealth, int maxHealth, int e){
+    public Character(String selectedCharacter, int currentHealth, int maxHealth, int energy){
+        this.selectedCharacter = selectedCharacter;
         health = new Health(currentHealth, maxHealth);
         battleInformation = new BattleInformation();
         deck = new LinkedList<>();
@@ -29,7 +31,7 @@ public abstract class Character {
         drawPile = new LinkedList<>();
         discardPile = new LinkedList<>();
         exhaustedPile = new LinkedList<>();
-        energy = e;
+        this.energy = energy;
     }
 
     public boolean isMyTurn(){
