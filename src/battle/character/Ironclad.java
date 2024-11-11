@@ -17,10 +17,10 @@ public class Ironclad extends Character{
     @Override
     void initDeck(){
         for(int i=0; i<5; i++){
-            Card strike = new Card("타격", CardType.Attack, "피해를 6 줍니다.", 1);    //카드 객체 생성 : 타격 카드, 타입 공격, 카드 내용, 에너지 
-            CardEffect strikeEffect = new CardEffect(DAMAGE, 6);
+            Card strike = new Card("타격", CardType.Attack, "피해를 6 줍니다.", 1);    //타격 카드(객체) 생성 : 타격 카드, 타입 공격, 카드 내용, 에너지 
+            CardEffect strikeEffect = new CardEffect(DAMAGE, 6);    //카드 하나에 여러 효과를 고려해서 배열에 추가
             strike.getCardEffectList().add(strikeEffect);
-            deck.add(strike);
+            deck.add(strike);    //덱에 타격 카드 추가
         }
         for(int i=0; i<4; i++){
             Card defend = new Card("수비", CardType.Skill, "방어도를 5 얻습니다.", 1);
