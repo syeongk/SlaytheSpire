@@ -10,7 +10,7 @@ import java.util.LinkedList;
 
 public abstract class Character {
 
-    private String selectedCharacter;
+    private String characterName;
     private Health health;
     private Money money;
     private LinkedList<Potion> potions;
@@ -23,8 +23,8 @@ public abstract class Character {
     protected LinkedList<Card> exhaustedPile;
     private int energy;
 
-    public Character(String selectedCharacter, int currentHealth, int maxHealth, int energy){
-        this.selectedCharacter = selectedCharacter;
+    public Character(String characterName, int currentHealth, int maxHealth, int energy){
+        this.characterName = characterName;
         health = new Health(currentHealth, maxHealth);
         money = new Money();
         potions = new LinkedList<>();
