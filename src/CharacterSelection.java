@@ -13,6 +13,7 @@ public class CharacterSelection extends JPanel implements ActionListener {
     private JButton watcher;
     private int selectedCharacter = 1;
     private Character character;
+    private GameState gameState;
 
     JButton departure;
 
@@ -64,7 +65,9 @@ public class CharacterSelection extends JPanel implements ActionListener {
             if (selectedCharacter == 1){
                 character = new Ironclad();
             }
-            Map map = new Map(character);
+
+            gameState = new GameState(character);
+            Map map = new Map(gameState);
             cardPanel.add(map, "Map");
             cardLayout.show(cardPanel, "Map");
         }

@@ -19,21 +19,21 @@ public abstract class Character {
     protected LinkedList<Card> drawPile;
     protected LinkedList<Card> discardPile;
     protected LinkedList<Card> exhaustedPile;
-    private int energy;
+    private Energy energy;
 
     public Character(String characterName, int currentHealth, int maxHealth, int energy){
         this.characterName = characterName;
-        health = new Health(currentHealth, maxHealth);
-        money = new Money();
-        potions = new LinkedList<>();
-        battleInformation = new BattleInformation();
-        relics = new ArrayList<>();
-        deck = new LinkedList<>();
-        handPile = new LinkedList<>();
-        drawPile = new LinkedList<>();
-        discardPile = new LinkedList<>();
-        exhaustedPile = new LinkedList<>();
-        this.energy = energy;
+        this.health = new Health(currentHealth, maxHealth);
+        this.money = new Money();
+        this.potions = new LinkedList<>();
+        this.battleInformation = new BattleInformation();
+        this.relics = new ArrayList<>();
+        this.deck = new LinkedList<>();
+        this.handPile = new LinkedList<>();
+        this.drawPile = new LinkedList<>();
+        this.discardPile = new LinkedList<>();
+        this.exhaustedPile = new LinkedList<>();
+        this.energy = new Energy(energy);
     }
 
     public boolean isMyTurn(){
@@ -137,11 +137,11 @@ public abstract class Character {
         this.exhaustedPile = exhaustedPile;
     }
 
-    public int getEnergy() {
+    public Energy getEnergy() {
         return energy;
     }
 
-    public void setEnergy(int energy) {
+    public void setEnergy(Energy energy) {
         this.energy = energy;
     }
 

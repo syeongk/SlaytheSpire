@@ -3,22 +3,35 @@ import battle.character.Character;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Map extends JPanel {
+public class Map extends JPanel implements ActionListener {
 
-    private StatusBar statusBar;
-    private Character character;
+    private JButton normalRoom;
+    private GameState gameState;
+    CardLayout cardLayout = MainFrame.cardLayout;
+    JPanel cardPanel = MainFrame.cardPanel;
 
-    public Map(Character character){
-        this.character = character;
-        statusBar = new StatusBar(this.character);
+    public Map(GameState gameState){
+
+        this.gameState = gameState;
+        setLayout(new BorderLayout());
+        add(gameState.getStatusBar(), BorderLayout.NORTH);
 
 
+        JPanel center = new JPanel();
+        add(center, BorderLayout.CENTER);
+        normalRoom = new JButton("일반 몬스터");
+        normalRoom.addActionListener(this);
+        center.add(normalRoom);
+    }
 
-        JPanel p = new JPanel();
-        p.add(statusBar);
-
-        add(p);
-
+    public void actionPerformed(ActionEvent e){
+        if (e.getSource()==normalRoom) {
+            NormalRoom normalRoom = new NormalRoom(gameState);
+            cardPanel.add(normalRoom, "NormalRoom");
+            cardLayout.show(cardPanel, "NormalRoom");
+        }
     }
 }
