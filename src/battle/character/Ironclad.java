@@ -10,8 +10,8 @@ import static status.CardEffectType.*;
 public class Ironclad extends Character{
 
     public Ironclad(){
-        super("아이언 클래드", 80, 80, 3);  //부모 생성자 호출 : 선택된 캐릭터 이름, 현재 체력, 최대 체력, 에너지
-        initDeck();
+        super("아이언 클래드", 80, 80, 3);    //부모 생성자 호출 : 선택된 캐릭터 이름, 현재 체력, 최대 체력, 에너지
+        initDeck();    //아이언 클래드 덱 초기화
     }
 
     @Override
