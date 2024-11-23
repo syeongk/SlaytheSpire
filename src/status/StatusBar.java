@@ -22,61 +22,74 @@ public class StatusBar extends JPanel {
         myDeck = this.character.getDeck();
         myPotions = this.character.getPotions();
 
-        ImageIcon backgroundImage = new ImageIcon("src/imgs/status_bar.png");
+        setLayout(new BorderLayout());
 
-        JPanel mainPanel = new JPanel() {
+        ImageIcon backgroundImage = new ImageIcon("src/imgs/bar.png");
+
+        JPanel barPanel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                g.drawImage(backgroundImage.getImage(), 0, 0, getWidth(), getHeight(), this);
+                g.drawImage(backgroundImage.getImage(), 0, 0, this);
             }
         };
-        add(mainPanel);
+        add(barPanel, BorderLayout.NORTH);
 
-        mainPanel.setLayout(new GridLayout(1,3));
-        setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
+        barPanel.setLayout(new GridLayout(1,5));
 
         //상태바 JLabel 및 JButton 추가
         //TODO : 데이터베이스에서 닉네임 가져오기
         Font font = new Font("Arial", Font.PLAIN, 20);
         JLabel nameLabel = new JLabel("seo");
         nameLabel.setFont(font);
+        nameLabel.setForeground(Color.WHITE);
 
         JLabel characterLabel = new JLabel(character.getCharacterName());
         characterLabel.setFont(font);
+        characterLabel.setForeground(Color.WHITE);
 
-        ImageIcon healthImageIcon = new ImageIcon("src/imgs/health.png");
-        Image img1 = healthImageIcon.getImage();
-        Image healthImg = img1.getScaledInstance(30, 35, Image.SCALE_SMOOTH);
-        healthImageIcon = new ImageIcon(healthImg);
-        JLabel healthImageLabel = new JLabel(healthImageIcon);
+
+        JLabel healthImageLabel = new JLabel(scaleImage("src/imgs/panelHeart.png"));
         JLabel healthLabel = new JLabel(myHealth.getCurrentHealth() + "/" + myHealth.getMaxHealth());
         healthLabel.setForeground(Color.RED);
         healthLabel.setFont(font);
 
 
-        ImageIcon moneyImageIcon = new ImageIcon("src/imgs/money.png");
-        Image img2 = moneyImageIcon.getImage();
-        Image moneyImg = img2.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
-        moneyImageIcon = new ImageIcon(moneyImg);
-        JLabel moneyImageLabel = new JLabel(moneyImageIcon);
+        JLabel moneyImageLabel = new JLabel(scaleImage("src/imgs/panelGoldBag.png"));
         JLabel moneyLabel = new JLabel(Integer.toString(myMoney));
-        moneyLabel.setForeground(Color.YELLOW);
         moneyLabel.setFont(font);
 
+        JLabel floorImageLabel = new JLabel(scaleImage("src/imgs/floor.png"));
         JLabel floorLabel = new JLabel(floor + "");
         floorLabel.setFont(font);
+        floorLabel.setForeground(Color.WHITE);
 
-        JButton mapButton = new JButton("맵");
-        JButton cardAmountButton = new JButton(Integer.toString(myDeck.size()));
-        JButton settingButton = new JButton("환경설정");
+
+        JButton mapButton = new JButton(scaleImage("src/imgs/map.png"));
+        JButton cardAmountButton = new JButton(scaleImage("src/imgs/deck.png"));
+        JButton settingButton = new JButton(scaleImage("src/imgs/settings.png"));
+        mapButton.setPreferredSize(new Dimension(45, 45));
+        cardAmountButton.setPreferredSize(new Dimension(45, 45));
+        settingButton.setPreferredSize(new Dimension(45, 45));
+        mapButton.setBorderPainted(false);
+        cardAmountButton.setBorderPainted(false);
+        settingButton.setBorderPainted(false);
+        mapButton.setFocusPainted(false);
+        cardAmountButton.setFocusPainted(false);
+        settingButton.setFocusPainted(false);
+
+
 
         JPanel panel1 = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JPanel panel2 = new JPanel();
+        JPanel panel2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JPanel panel3 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        mainPanel.add(panel1);
-        mainPanel.add(panel2);
-        mainPanel.add(panel3);
+        JPanel empty1 = new JPanel();
+        JPanel empty2 = new JPanel();
+        barPanel.add(panel1);
+        barPanel.add(empty1);
+        barPanel.add(panel2);
+        barPanel.add(empty2);
+        barPanel.add(panel3);
 
         panel1.add(nameLabel);
         panel1.add(characterLabel);
@@ -85,11 +98,26 @@ public class StatusBar extends JPanel {
         panel1.add(moneyImageLabel);
         panel1.add(moneyLabel);
 
+        panel2.add(floorImageLabel);
         panel2.add(floorLabel);
 
         panel3.add(mapButton);
         panel3.add(cardAmountButton);
         panel3.add(settingButton);
+
+        panel1.setOpaque(false);
+        panel2.setOpaque(false);
+        panel3.setOpaque(false);
+        empty1.setOpaque(false);
+        empty2.setOpaque(false);
+    }
+
+    public ImageIcon scaleImage(String imagePath){
+        ImageIcon originalIcon = new ImageIcon(imagePath);
+        Image scaleImage = originalIcon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        ImageIcon scaleIcon = new ImageIcon(scaleImage);
+
+        return scaleIcon;
     }
 
 }

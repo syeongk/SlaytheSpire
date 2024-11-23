@@ -23,6 +23,8 @@ public abstract class Character {
     protected LinkedList<Card> exhaustedPile;
     private Energy energy;
     private PriorityQueue<StatusEffect> statusEffect;
+    private final int x = 350;
+    private final int y = 350;
 
     public Character(String characterName, int money, int currentHealth, int maxHealth, Relic relic){
         this.characterName = characterName;
