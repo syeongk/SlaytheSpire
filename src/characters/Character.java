@@ -10,6 +10,7 @@ import statusEffect.StatusEffect;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
+import java.util.TreeMap;
 
 public abstract class Character {
 
@@ -24,7 +25,7 @@ public abstract class Character {
     protected LinkedList<Card> discardPile;
     protected LinkedList<Card> exhaustedPile;
     private Energy energy;
-    private PriorityQueue<StatusEffect> statusEffect;
+    private TreeMap<String, Integer> statusEffects;
     private final int x = 250;
     private final int y = 350;
 
@@ -43,7 +44,7 @@ public abstract class Character {
         this.discardPile = new LinkedList<>();
         this.exhaustedPile = new LinkedList<>();
         this.energy = new Energy(3);
-        this.statusEffect = new PriorityQueue<>();
+        this.statusEffects = new TreeMap<>();
         this.imagePath = imagePath;
     }
 
@@ -151,6 +152,10 @@ public abstract class Character {
 
     public String getImagePath() {
         return imagePath;
+    }
+
+    public TreeMap<String, Integer> getStatusEffects() {
+        return statusEffects;
     }
 
 }

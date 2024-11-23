@@ -1,14 +1,22 @@
 package monsters;
 
+import panels.GameState;
 import statusEffect.StatusEffect;
 
 import java.util.PriorityQueue;
+import java.util.Random;
 
 public abstract class Monster {
-    private int health;  //체력
-    private MonsterRank type; //약한, 강한, 보스
-    private PriorityQueue<StatusEffect> statusEffect; //상태 이상
-    private String imagePath;
+    protected Character character;
+    protected int health;  //체력
+    protected MonsterRank type; //약한, 강한, 보스
+    protected PriorityQueue<StatusEffect> statusEffect; //상태 이상
+    protected String imagePath;
+    protected int monsterTurn = 1;
+    protected int block = 0;
+    protected int strength = 0;
+    protected static Random r = new Random();
+    protected int damage = 0;
 
 
     public Monster(int health, MonsterRank type, String imagePath){
@@ -18,7 +26,10 @@ public abstract class Monster {
         this.imagePath = imagePath;
     }
 
-    public abstract void attack();
+
+    public int attack(){
+        return damage + strength;
+    }
 
     public int getHealth() {
         return health;
