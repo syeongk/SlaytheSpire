@@ -128,6 +128,7 @@ public class MainFrame extends JFrame implements ActionListener {
                         exit.setIcon(null);
                         exit.setText("종료");
 
+
                     }
                 }
             });
