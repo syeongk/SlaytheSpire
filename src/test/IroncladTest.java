@@ -1,8 +1,8 @@
 package test;
 
-import battle.character.Ironclad;
+import characters.Ironclad;
 import org.junit.Test;
-import status.Card;
+import card.Card;
 
 import java.util.LinkedList;
 

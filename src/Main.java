@@ -1,3 +1,5 @@
+import panels.MainFrame;
+
 import java.awt.*;
 import java.io.IOException;
 
