@@ -1,5 +1,7 @@
 package battle.monster;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.PriorityQueue;
 
 public abstract class Monster {
@@ -7,12 +9,20 @@ public abstract class Monster {
     private MonsterRank type; //일반, 엘리트, 보스
     private PriorityQueue<StatusEffect> statusEffect; //상태 이상
     private static BattleInformation battleInformation;
+    private ImageIcon monsterImageIcon;
 
-    public Monster(int h, MonsterRank t){
+
+    public Monster(int h, MonsterRank t, ImageIcon imageIcon){
         health = h;
         type = t;
         statusEffect = new PriorityQueue<>();
         battleInformation = new BattleInformation();
+        monsterImageIcon = imageIcon;
+
+        //몬스터 이미지 사이즈 조절
+        Image image = monsterImageIcon.getImage();
+        Image monsterImage = image.getScaledInstance(150, 150, Image.SCALE_SMOOTH);
+        monsterImageIcon = new ImageIcon(monsterImage);
     }
 
     public boolean IsMonsterTurn(){
@@ -20,6 +30,10 @@ public abstract class Monster {
             return true;
         else
             return false;
+    }
+
+    public void createMonster(){
+
     }
 
     abstract void attack();
@@ -47,6 +61,25 @@ public abstract class Monster {
 
     public PriorityQueue<StatusEffect> getStatusEffect() {
         return statusEffect;
+    }
+    public void setStatusEffect(PriorityQueue<StatusEffect> statusEffect) {
+        this.statusEffect = statusEffect;
+    }
+
+    public static BattleInformation getBattleInformation() {
+        return battleInformation;
+    }
+
+    public static void setBattleInformation(BattleInformation battleInformation) {
+        Monster.battleInformation = battleInformation;
+    }
+
+    public ImageIcon getMonsterImageIcon() {
+        return monsterImageIcon;
+    }
+
+    public void setMonsterImageIcon(ImageIcon monsterImageIcon) {
+        this.monsterImageIcon = monsterImageIcon;
     }
 
 

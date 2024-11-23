@@ -1,9 +1,9 @@
 package status;
 
 public enum CardType {
-    Attack,
-    Skill,
-    Power,
-    StatusEffect,
-    Curse
+    공격,
+    스킬,
+    파워,
+    상태이상,
+    저주
 }
