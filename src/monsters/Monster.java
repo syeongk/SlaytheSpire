@@ -1,5 +1,6 @@
 package monsters;
 
+import characterStatus.Health;
 import characters.Character;
 import panels.GameState;
 import statusEffect.StatusEffect;
@@ -11,7 +12,7 @@ import static panels.GameState.getInstance;
 
 public abstract class Monster {
     protected GameState gameState;
-    protected int health;  //체력
+    protected Health health;  //체력
     protected MonsterRank type; //약한, 강한, 보스
     protected PriorityQueue<StatusEffect> statusEffect; //상태 이상
     protected String imagePath;
@@ -25,7 +26,7 @@ public abstract class Monster {
 
 
     public Monster(int health, MonsterRank type, String imagePath, int x, int y){
-        this.health = health;
+        this.health = new Health(health, health);
         this.type = type;
         this.statusEffect = new PriorityQueue<>();
         this.imagePath = imagePath;
@@ -40,13 +41,26 @@ public abstract class Monster {
         character.takeDamage(damage + strength);
     }
 
-    public int getHealth() {
+    public Health getHealth() {
         return health;
     }
 
-    public void setHealth(int health) {
+    public void setHealth(Health health) {
         this.health = health;
     }
+
+    public int getCurrentHealth(){
+        return this.health.getCurrentHealth();
+    }
+    public void setCurrentHealth(int health){
+        this.health.setCurrentHealth(health);
+    }
+
+    public int getMaxHealth(){
+        return this.health.getMaxHealth();
+    }
+
+
 
     public String getImagePath() {
         return imagePath;

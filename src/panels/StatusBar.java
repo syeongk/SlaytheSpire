@@ -86,12 +86,9 @@ public class StatusBar extends JPanel {
         JPanel panel1 = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JPanel panel2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JPanel panel3 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        JPanel empty1 = new JPanel();
-        JPanel empty2 = new JPanel();
+
         barPanel.add(panel1);
-        barPanel.add(empty1);
         barPanel.add(panel2);
-        barPanel.add(empty2);
         barPanel.add(panel3);
 
         panel1.add(nameLabel);
@@ -111,8 +108,6 @@ public class StatusBar extends JPanel {
         panel1.setOpaque(false);
         panel2.setOpaque(false);
         panel3.setOpaque(false);
-        empty1.setOpaque(false);
-        empty2.setOpaque(false);
     }
 
     public ImageIcon scaleImage(String imagePath){

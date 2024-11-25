@@ -30,7 +30,7 @@ public class LouseG extends Monster implements MonsterInterface {
 
     public void takeDamage(int damage){
         if (block - damage < 0){
-            health += block - damage;
+            setCurrentHealth(getCurrentHealth() + (block - damage));
             damaged = true;
         } else {
             damaged = false;

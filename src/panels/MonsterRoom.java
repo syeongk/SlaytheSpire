@@ -29,6 +29,7 @@ public class MonsterRoom extends JPanel {
     private ImageIcon characterImageIcon;
     private ImageIcon backgroundImageIcon;
     private LinkedList<Monster> monsters;
+    private ImageIcon energyImageIcon;
 
     public MonsterRoom(){
 
@@ -38,6 +39,7 @@ public class MonsterRoom extends JPanel {
         //GameState, Charater 정보 가져오기
         this.gameState = GameState.getInstance();
         this.character = gameState.getCharacter();
+
 
         //상태바 추가
         add(gameState.getStatusBar(), BorderLayout.NORTH);
@@ -82,6 +84,7 @@ public class MonsterRoom extends JPanel {
 
         characterImageIcon = scaleImage(character.getImagePath(), 270, 200);
         backgroundImageIcon = scaleImage("src/imgs/scene1.png", 1600, 1150);
+        energyImageIcon = scaleImage("src/imgs/energyRedVFX.png", 50, 50);
 
 
         addMouseListener(new MouseAdapter(){
@@ -122,13 +125,11 @@ public class MonsterRoom extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
 
         //에너지 상태
-        int energyX = 150;
+        int energyX = 140;
         int energyY = 610;
-        int energyW = 100;
-        int energyH = 100;
-
-        g.setColor(Color.BLACK);
-        g.fillOval(energyX, energyY, energyW, energyH);
+        int energyW = 50;
+        int energyH = 50;
+        g.drawImage(energyImageIcon.getImage(), energyX, energyY, null);
 
         Font font = new Font("Arial", Font.BOLD, 30);
         g.setColor(Color.WHITE);
@@ -144,35 +145,54 @@ public class MonsterRoom extends JPanel {
 
 
         //몬스터
+        font = new Font("Arial", Font.PLAIN, 15);
+        g.setFont(font);
         for (int i=0; i<monsters.size(); i++){
-            g.drawImage(monsterImageIcons[i].getImage(), monsters.get(i).getX(), monsters.get(i).getY(),null);
+            //몬스터 이미지
+            Monster monster = monsters.get(i);
+            int monsterX = monster.getX();
+            int monsterY = monster.getY();
+            g.drawImage(monsterImageIcons[i].getImage(), monsterX, monsterY,null);
+
+            //몬스터 체력바
+            int healthBarX = monsterX;
+            int healthBarY = monsterY + monsterImageIcons[i].getIconHeight() + 15;
+            int healthBarW = monsterImageIcons[i].getIconWidth();
+            int healthBarH = 15;
+
+            //몬스터 체력
+            g.setColor(Color.RED);
+            g.fillRoundRect(healthBarX, healthBarY, healthBarW, healthBarH,15, 15);
+            g.setColor(Color.WHITE);
+            g.drawString((monster.getCurrentHealth()) + "/" + monster.getMaxHealth(), healthBarX + (healthBarW / 2) - 20, healthBarY + (healthBarH / 2) );
         }
 
 
         //뽑을 카드
-        int drawPileX = 50;
+
+        int drawPileX = 20;
         int drawPileY = 750;
-        int drawPileW = 70;
-        int drawPileH = 70;
-        g.setColor(Color.BLACK);
-        g.fillRect(drawPileX, drawPileY, drawPileW, drawPileH);
+        int drawPileW = 100;
+        int drawPileH = 100;
+        ImageIcon drawPileImage = scaleImage("src/imgs/base1.png", drawPileW, drawPileH);
+        g.drawImage(drawPileImage.getImage(), drawPileX, drawPileY, null);
 
         font = new Font("Arial", Font.BOLD, 20);
-        g.setColor(Color.WHITE);
+        g.setColor(Color.BLACK);
         g.setFont(font);
         g.drawString(Integer.toString(drawPile.size()), drawPileX + drawPileW / 2 - 10, drawPileY + drawPileH / 2 + 5);
 
         //버린 카드
-        int discardCardX = 1500;
-        int discardCardY = 750;
-        int discardCardW = 70;
-        int discardCardH = 70;
-        g.setColor(Color.BLACK);
-        g.fillRect(discardCardX, discardCardY, discardCardW, discardCardH);
+        int discardPileX = 1480;
+        int discardPileY = 750;
+        int discardPileW = 100;
+        int discardPileH = 100;
+        ImageIcon discardPileImage = scaleImage("src/imgs/base2.png", discardPileW, discardPileH);
+        g.drawImage(discardPileImage.getImage(), discardPileX, discardPileY, null);
 
-        g.setColor(Color.WHITE);
+        g.setColor(Color.BLACK);
         g.setFont(font);
-        g.drawString(Integer.toString(discardPile.size()), discardCardX + discardCardW / 2 - 10, discardCardY + discardCardH / 2 + 5);
+        g.drawString(Integer.toString(discardPile.size()), discardPileX + discardPileW / 2 - 10, discardPileY + discardPileH / 2 + 5);
 
         //현재 카드
         int handCardX = 650 - (40 * (handPile.size()));
@@ -238,8 +258,6 @@ public class MonsterRoom extends JPanel {
 
 
     }
-
-
 
     }
 
