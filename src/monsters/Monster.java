@@ -20,14 +20,18 @@ public abstract class Monster {
     protected int strength = 0;
     protected static Random r = new Random();
     protected int damage = 0;
+    protected int x;
+    protected int y;
 
 
-    public Monster(int health, MonsterRank type, String imagePath){
+    public Monster(int health, MonsterRank type, String imagePath, int x, int y){
         this.health = health;
         this.type = type;
         this.statusEffect = new PriorityQueue<>();
         this.imagePath = imagePath;
         this.gameState = getInstance();
+        this.x = x;
+        this.y = y;
     }
 
 
@@ -44,6 +48,10 @@ public abstract class Monster {
         this.health = health;
     }
 
+    public String getImagePath() {
+        return imagePath;
+    }
+
     public MonsterRank getType() {
         return type;
     }
@@ -57,6 +65,22 @@ public abstract class Monster {
     }
     public void setStatusEffect(PriorityQueue<StatusEffect> statusEffect) {
         this.statusEffect = statusEffect;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 
 

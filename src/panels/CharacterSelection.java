@@ -213,7 +213,7 @@ public class CharacterSelection extends JPanel implements ActionListener {
             }
 
             gameState = getInstance(character);
-            Map map = new Map(gameState);
+            Map map = new Map();
             cardPanel.add(map, "panels.Map");
             cardLayout.show(cardPanel, "panels.Map");
         }

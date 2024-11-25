@@ -13,7 +13,7 @@ public class JawWorm extends Monster implements MonsterInterface {
     ArrayList<Integer> usedSkills = new ArrayList<>();
 
     public JawWorm() {
-        super(initHealth(), MonsterRank.WEAK, "src/imgs/jawWorm.png");
+        super(initHealth(), MonsterRank.WEAK, "src/imgs/jawWorm.png", 1000, 350);
         usedSkills.add(-1);
     }
 

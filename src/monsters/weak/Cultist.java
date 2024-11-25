@@ -10,7 +10,7 @@ public class Cultist extends Monster implements MonsterInterface {
     private boolean ritualActivated;
 
     public Cultist(){
-        super(initHealth(), MonsterRank.WEAK, "src/imgs/cultist.png");
+        super(initHealth(), MonsterRank.WEAK, "src/imgs/cultist.png", 1000, 350);
         damage = 6;
     }
 

@@ -7,54 +7,81 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Collections;
+import java.util.Random;
 
 import characters.Character;
 import card.Card;
 import card.CardEffect;
 import characterStatus.Energy;
+import monsters.Monster;
+import monsters.weak.*;
 
 public class MonsterRoom extends JPanel {
 
     private GameState gameState;
     private Character character;
     private Energy energy;
-    private ImageIcon monsterImageIcon;
+    private ImageIcon[] monsterImageIcons;
     private LinkedList<Card> drawPile;
     private LinkedList<Card> handPile;
     private LinkedList<Card> discardPile;
     private int i;
     private ImageIcon characterImageIcon;
     private ImageIcon backgroundImageIcon;
+    private LinkedList<Monster> monsters;
 
-    public MonsterRoom(GameState gameState){
+    public MonsterRoom(){
 
         setLayout(new BorderLayout());
         setOpaque(false);
 
-        this.gameState = gameState;
+        //GameState, Charater 정보 가져오기
+        this.gameState = GameState.getInstance();
         this.character = gameState.getCharacter();
 
+        //상태바 추가
         add(gameState.getStatusBar(), BorderLayout.NORTH);
 
+        //캐릭터 에너지, 카드 정보 가져오기
         energy = character.getEnergy();
         drawPile = character.getDrawPile();
         handPile = character.getHandPile();
         discardPile = character.getDiscardPile();
 
-        //TODO : 몬스터 랜덤
+        //몬스터 랜덤 생성
+        monsters = new LinkedList<>();
+        Random random = new Random();
+        int monsterSelection = random.nextInt(1,5);
+        switch (monsterSelection) {
+            case 1:
+                Monster cultist = new Cultist();
+                monsters.add(cultist);
+                break;
+            case 2:
+                Monster jawWorm = new JawWorm();
+                monsters.add(jawWorm);
+                break;
+            case 3:
+                Monster louseG = new LouseG();
+                monsters.add(louseG);
+                Monster louseR = new LouseR();
+                monsters.add(louseR);
+                break;
+            case 4:
+                Monster slimeM = new SlimeM();
+                monsters.add(slimeM);
+                Monster slimeS = new SlimeS();
+                monsters.add(slimeS);
+                break;
+        }
 
+        monsterImageIcons = new ImageIcon[monsters.size()];
+        for (int i=0; i<monsters.size(); i++){
+            monsterImageIcons[i] = scaleImage(monsters.get(i).getImagePath(), 180, 180);
+        }
 
-        monsterImageIcon = new ImageIcon("src/imgs/185.png");
-        Image img = monsterImageIcon.getImage();
-        Image monsterImg = img.getScaledInstance(100, 150, Image.SCALE_SMOOTH);
-        monsterImageIcon = new ImageIcon(monsterImg);
-
-        characterImageIcon = new ImageIcon(character.getImagePath());
-        Image characterImage = characterImageIcon.getImage();
-        Image characterImg = characterImage.getScaledInstance(270, 200, Image.SCALE_SMOOTH);
-        characterImageIcon = new ImageIcon(characterImg);
-
-        backgroundImageIcon = scaleImage("src/imgs/scene1.jpg", 1600, 800);
+        characterImageIcon = scaleImage(character.getImagePath(), 270, 200);
+        backgroundImageIcon = scaleImage("src/imgs/scene1.png", 1600, 1150);
 
 
         addMouseListener(new MouseAdapter(){
@@ -110,15 +137,16 @@ public class MonsterRoom extends JPanel {
 
 
         //배경
-        g.drawImage(backgroundImageIcon.getImage(), 0, 60, null);
+        g.drawImage(backgroundImageIcon.getImage(), 0, -250, null);
 
         //캐릭터
         g.drawImage(characterImageIcon.getImage(), character.getX(), character.getY(), null);
 
 
         //몬스터
-        g.drawImage(monsterImageIcon.getImage(), getWidth() - 450, getHeight() - 500, null);
-        g.drawRect(1300, 350, 100, 100);
+        for (int i=0; i<monsters.size(); i++){
+            g.drawImage(monsterImageIcons[i].getImage(), monsters.get(i).getX(), monsters.get(i).getY(),null);
+        }
 
 
         //뽑을 카드

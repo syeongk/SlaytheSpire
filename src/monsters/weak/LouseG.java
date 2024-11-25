@@ -12,7 +12,7 @@ public class LouseG extends Monster implements MonsterInterface {
     Queue<Integer> usedSkills = new ArrayDeque<>(); // grow : 1, bite : 2
 
     public LouseG(){
-        super(initHealth(), MonsterRank.WEAK, "src/imgs/LouseG.png");
+        super(initHealth(), MonsterRank.WEAK, "src/imgs/LouseG.png", 950, 350);
         damage = r.nextInt(5,8);
     }
 

@@ -19,7 +19,7 @@ public class SlimeM extends Monster implements MonsterInterface {
     Stack<Integer> usedSkills = new Stack<>(); //1:lick, 2:tackle, 3:corrosiveSpit
 
     public SlimeM(){
-        super(initHealth(), MonsterRank.WEAK, "src/imgs/slimeM.png");
+        super(initHealth(), MonsterRank.WEAK, "src/imgs/slimeM.png", 950, 350);
         damage = 10;
     }
 

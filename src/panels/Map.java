@@ -13,9 +13,9 @@ public class Map extends JPanel implements ActionListener {
     JPanel cardPanel = MainFrame.cardPanel;
 
 
-    public Map(GameState gameState){
+    public Map(){
 
-        this.gameState = gameState;
+        this.gameState = GameState.getInstance();
 
         setLayout(new BorderLayout());
         add(gameState.getStatusBar(), BorderLayout.NORTH);
@@ -31,7 +31,7 @@ public class Map extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent e){
         if (e.getSource()==normalRoom) {
-            MonsterRoom monsterRoom = new MonsterRoom(gameState);
+            MonsterRoom monsterRoom = new MonsterRoom();
             cardPanel.add(monsterRoom, "panels.NormalRoom");
             cardLayout.show(cardPanel, "panels.NormalRoom");
         }

@@ -15,7 +15,7 @@ public class LouseR extends Monster implements MonsterInterface {
     Queue<Integer> usedSkills = new ArrayDeque<>(); // grow : 1, bite : 2
 
     public LouseR(){
-        super(initHealth(), MonsterRank.WEAK, "src/imgs/LouseR.png");
+        super(initHealth(), MonsterRank.WEAK, "src/imgs/LouseR.png", 1200, 350);
         damage = r.nextInt(5,8);
     }
 

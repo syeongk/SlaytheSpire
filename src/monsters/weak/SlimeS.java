@@ -13,7 +13,7 @@ public class SlimeS extends Monster implements MonsterInterface {
     Stack<Integer> stack = new Stack<>();
 
     public SlimeS(){
-        super(initHealth(), MonsterRank.WEAK, "src/imgs/slimeS.png");
+        super(initHealth(), MonsterRank.WEAK, "src/imgs/slimeS.png", 1200, 350);
         damage = 3;
     }
 
