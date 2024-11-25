@@ -1,6 +1,8 @@
-package characterStatus;
+package panels;
 
 import card.Card;
+import characterStatus.Health;
+import characterStatus.Potion;
 import characters.Character;
 import javax.swing.*;
 import java.awt.*;

@@ -1,6 +1,5 @@
 package panels;
 
-import characterStatus.StatusBar;
 import characters.Character;
 
 public class GameState {
@@ -10,7 +9,7 @@ public class GameState {
     private int turnCount = 1;
 
 
-    public GameState(Character character){
+    private GameState(Character character){
         this.character = character;
         this.statusBar = new StatusBar(this.character);
     }
@@ -22,11 +21,15 @@ public class GameState {
         return instance;
     }
 
+    public static GameState getInstance() {
+        if (instance == null) {
+            throw new IllegalStateException("GameState is not initialized. Call getInstance(Character character) first.");
+        }
+        return instance;
+    }
+
     public boolean isMyTurn(){
-        if (turnCount % 2 == 1)
-            return true;
-        else
-            return false;
+        return turnCount % 2 == 1;
     }
 
     public StatusBar getStatusBar(){

@@ -5,6 +5,7 @@ import characterStatus.Energy;
 import characterStatus.Health;
 import characterStatus.Potion;
 import characterStatus.Relic;
+import panels.GameState;
 import statusEffect.StatusEffect;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.PriorityQueue;
 import java.util.TreeMap;
 
 public abstract class Character {
-
+    private static Character instance;
     private String characterName;
     private Health health;
     private int money;
@@ -28,11 +29,10 @@ public abstract class Character {
     private TreeMap<String, Integer> statusEffects;
     private final int x = 250;
     private final int y = 350;
-
-
+    private int block;
     private String imagePath;
 
-    public Character(String characterName, int money, int currentHealth, int maxHealth, Relic relic, String imagePath){
+    protected Character(String characterName, int money, int currentHealth, int maxHealth, Relic relic, String imagePath){
         this.characterName = characterName;
         this.health = new Health(currentHealth, maxHealth);
         this.money = money;
@@ -46,10 +46,21 @@ public abstract class Character {
         this.energy = new Energy(3);
         this.statusEffects = new TreeMap<>();
         this.imagePath = imagePath;
+        this.block = 0;
+    }
+
+
+    abstract void initDeck();
+
+    public void takeDamage(int damage){
+        int currentHealth = health.getCurrentHealth();
+
+        if (block - damage < 0)
+            health.setCurrentHealth(currentHealth + (block - damage));
+
     }
 
     //abstract void performTurn();
-    abstract void initDeck();
     //abstract void attack();
     //abstract void buff();
     //abstract void debuff();
@@ -106,8 +117,8 @@ public abstract class Character {
         return discardPile;
     }
 
-    public void setDiscardPile(LinkedList<Card> discardPile) {
-        this.discardPile = discardPile;
+    public void addDiscardPile(Card card) {
+        this.getDiscardPile().add(card);
     }
 
     public LinkedList<Card> getDrawPile() {

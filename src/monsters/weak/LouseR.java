@@ -31,8 +31,8 @@ public class LouseR extends Monster implements MonsterInterface {
         return statusEffect;
     }
 
-    public int bite(){
-        return attack();
+    public void bite(){
+        attack();
     }
 
     public void takeDamage(int damage){

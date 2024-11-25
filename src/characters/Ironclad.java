@@ -2,10 +2,11 @@ package characters;
 
 import card.Card;
 import card.CardEffect;
-import card.CardType;
 import characterStatus.Relic;
 
 import static card.CardEffectType.*;
+import static card.CardType.Attack;
+import static card.CardType.Skill;
 
 
 public class Ironclad extends Character{
@@ -18,18 +19,18 @@ public class Ironclad extends Character{
     @Override
     void initDeck(){
         for(int i=0; i<5; i++){
-            Card strike = new Card("타격", CardType.공격, 1);    //타격 카드(객체) 생성 : 타격 카드, 타입 공격, 카드 내용, 에너지
+            Card strike = new Card("타격", Attack, 1);    //타격 카드(객체) 생성 : 타격 카드, 타입 공격, 카드 내용, 에너지
             CardEffect strikeEffect = new CardEffect(DAMAGE,"피해를 6 줍니다", 6);
             strike.getCardEffectList().add(strikeEffect);
             deck.add(strike);    //덱에 타격 카드 추가
         }
         for(int i=0; i<4; i++){
-            Card defend = new Card("수비", CardType.스킬, 1);
+            Card defend = new Card("수비", Skill, 1);
             CardEffect defendEffect = new CardEffect(BLOCK,"방어도를 5 얻습니다.", 5);
             defend.getCardEffectList().add(defendEffect);
             deck.add(defend);
         }
-        Card bash = new Card("강타", CardType.공격, 2);
+        Card bash = new Card("강타", Attack, 2);
         CardEffect bashEffect1 = new CardEffect(DAMAGE, "피해를 8 줍니다.", 8);    //카드 하나에 여러 효과를 고려
         CardEffect bashEffect2 = new CardEffect(VULNERABLE, "취약을 2 부여합니다.", 2);
         bash.getCardEffectList().add(bashEffect1);    //효과들을 배열에 추가

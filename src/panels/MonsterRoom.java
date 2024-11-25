@@ -13,7 +13,7 @@ import card.Card;
 import card.CardEffect;
 import characterStatus.Energy;
 
-public class NormalRoom extends JPanel {
+public class MonsterRoom extends JPanel {
 
     private GameState gameState;
     private Character character;
@@ -26,7 +26,7 @@ public class NormalRoom extends JPanel {
     private ImageIcon characterImageIcon;
     private ImageIcon backgroundImageIcon;
 
-    public NormalRoom(GameState gameState){
+    public MonsterRoom(GameState gameState){
 
         setLayout(new BorderLayout());
         setOpaque(false);

@@ -22,17 +22,17 @@ public class JawWorm extends Monster implements MonsterInterface {
     }
 
     //공격
-    public int chomp() {
+    public void chomp() {
         damage = 11;
-        return attack();
+        attack();
     }
 
     //공격 & 방어
-    public int thrash(){
+    public void thrash(){
         block += 5;
         damage = 7;
 
-        return attack();
+        attack();
     }
 
     //힘 & 방어

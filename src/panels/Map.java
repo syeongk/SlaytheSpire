@@ -31,8 +31,8 @@ public class Map extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent e){
         if (e.getSource()==normalRoom) {
-            NormalRoom normalRoom = new NormalRoom(gameState);
-            cardPanel.add(normalRoom, "panels.NormalRoom");
+            MonsterRoom monsterRoom = new MonsterRoom(gameState);
+            cardPanel.add(monsterRoom, "panels.NormalRoom");
             cardLayout.show(cardPanel, "panels.NormalRoom");
         }
     }

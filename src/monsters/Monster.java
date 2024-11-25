@@ -1,13 +1,16 @@
 package monsters;
 
+import characters.Character;
 import panels.GameState;
 import statusEffect.StatusEffect;
 
 import java.util.PriorityQueue;
 import java.util.Random;
 
+import static panels.GameState.getInstance;
+
 public abstract class Monster {
-    protected Character character;
+    protected GameState gameState;
     protected int health;  //체력
     protected MonsterRank type; //약한, 강한, 보스
     protected PriorityQueue<StatusEffect> statusEffect; //상태 이상
@@ -24,11 +27,13 @@ public abstract class Monster {
         this.type = type;
         this.statusEffect = new PriorityQueue<>();
         this.imagePath = imagePath;
+        this.gameState = getInstance();
     }
 
 
-    public int attack(){
-        return damage + strength;
+    public void attack(){
+        Character character = gameState.getCharacter();
+        character.takeDamage(damage + strength);
     }
 
     public int getHealth() {

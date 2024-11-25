@@ -13,6 +13,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static panels.GameState.getInstance;
+
 public class CharacterSelection extends JPanel implements ActionListener {
     private JButton ironclad;
     private JButton silent;
@@ -210,7 +212,7 @@ public class CharacterSelection extends JPanel implements ActionListener {
                 character = new Watcher();
             }
 
-            gameState = new GameState(character);
+            gameState = getInstance(character);
             Map map = new Map(gameState);
             cardPanel.add(map, "panels.Map");
             cardLayout.show(cardPanel, "panels.Map");

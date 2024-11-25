@@ -24,8 +24,8 @@ public class LouseG extends Monster implements MonsterInterface {
         strength += 3;
     }
 
-    public int bite(){
-        return attack();
+    public void bite(){
+        attack();
     }
 
     public void takeDamage(int damage){

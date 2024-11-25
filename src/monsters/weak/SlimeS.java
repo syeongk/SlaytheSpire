@@ -28,8 +28,8 @@ public class SlimeS extends Monster implements MonsterInterface {
         return statusEffect;
     }
 
-    public int tackle(){
-        return attack();
+    public void tackle(){
+        attack();
     }
 
     public void performTurn(){
