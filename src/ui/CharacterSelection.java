@@ -1,4 +1,4 @@
-package panels;
+package ui;
 
 import gameEntity.characters.*;
 import gameEntity.characters.Character;
@@ -13,7 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static panels.GameState.getInstance;
+import static ui.GameState.getInstance;
 
 public class CharacterSelection extends JPanel implements ActionListener {
     private JButton ironclad;

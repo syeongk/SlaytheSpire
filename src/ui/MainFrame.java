@@ -1,4 +1,4 @@
-package panels;
+package ui;
 
 import javax.swing.*;
 import java.awt.*;
@@ -7,11 +7,11 @@ import java.io.IOException;
 
 public class MainFrame extends JFrame {
 
-    static JPanel cardPanel;
-    static CardLayout cardLayout;
-    static File fontFile = new File("src/font/GyeonggiCheonnyeonBatangBold.ttf");
-    static Font font;
-    static Font smallFont;
+    public static JPanel cardPanel;
+    public static CardLayout cardLayout;
+    public static File fontFile = new File("src/font/GyeonggiCheonnyeonBatangBold.ttf");
+    public static Font font;
+    public static Font smallFont;
 
 
     public MainFrame() throws IOException, FontFormatException {

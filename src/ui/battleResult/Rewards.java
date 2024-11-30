@@ -1,35 +1,36 @@
-package panels;
+package ui.battleResult;
+
+import ui.MainFrame;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
 
-public class GameOver extends JPanel {
+public class Rewards extends JPanel {
     private ImageIcon bannerImageIcon;
     private ImageIcon rewardSheetImageIcon;
 
-    public GameOver(){
+    public Rewards(){
         setBackground(new Color(0, 0, 0, 200)); // 검은색, 투명도 100 설정
         setOpaque(true);
         setLayout(null);
 
         bannerImageIcon = scaleImage("src/imgs/selectBanner.png", 900, 200);
         rewardSheetImageIcon = scaleImage("src/imgs/rewardScreenSheet.png", 700, 600);
-        JButton toMain = new JButton(scaleImage("src/imgs/endTurnButton.png", 300, 250));
-        toMain.setFont(MainFrame.font);
-        toMain.setForeground(Color.WHITE);
-        toMain.setText("메인 메뉴");
-        toMain.setBounds(650, 700, 300, 150);
-        toMain.setHorizontalTextPosition(SwingConstants.CENTER);
-        toMain.setBorderPainted(false);
-        toMain.setFocusPainted(false);
-        toMain.setOpaque(false);
-        add(toMain);
-        toMain.addActionListener(e -> {
-            if(e.getSource() == toMain){
-                MainFrame.switchPanel("Main");
+        JButton toMap = new JButton(scaleImage("src/imgs/proceedButton.png", 230, 150));
+        toMap.setFont(MainFrame.font);
+        toMap.setForeground(Color.WHITE);
+        toMap.setText("다음 층");
+        toMap.setBounds(1200, 600, 230, 150);
+        toMap.setHorizontalTextPosition(SwingConstants.CENTER);
+        toMap.setBorderPainted(false);
+        toMap.setFocusPainted(false);
+        toMap.setOpaque(false);
+        add(toMap);
+        toMap.addActionListener(e -> {
+            if(e.getSource() == toMap){
+                MainFrame.switchPanel("Map");
             }
         });
 
@@ -40,8 +41,6 @@ public class GameOver extends JPanel {
                 System.out.println(e.getY());
             }
         });
-
-        GameState.setInstance(null);
     }
 
     protected void paintComponent(Graphics g){
@@ -58,4 +57,3 @@ public class GameOver extends JPanel {
         return scaleIcon;
     }
 }
-

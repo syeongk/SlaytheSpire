@@ -2,13 +2,13 @@ package gameEntity.monsters;
 
 import characterStatus.Health;
 import gameEntity.characters.Character;
-import panels.GameState;
+import ui.GameState;
 import statusEffect.StatusEffect;
 
 import java.util.PriorityQueue;
 import java.util.Random;
 
-import static panels.GameState.getInstance;
+import static ui.GameState.getInstance;
 
 public abstract class Monster {
     protected GameState gameState;

@@ -2,7 +2,7 @@ package card;
 
 import gameEntity.characters.Character;
 import gameEntity.monsters.Monster;
-import panels.GameState;
+import ui.GameState;
 
 public enum CardEffectType {
     // 피해 관련 효과

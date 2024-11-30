@@ -1,4 +1,4 @@
-package panels;
+package ui.room;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,6 +18,9 @@ import card.CardEffect;
 import characterStatus.Energy;
 import gameEntity.monsters.Monster;
 import gameEntity.monsters.weak.*;
+import ui.battleResult.GameOver;
+import ui.GameState;
+import ui.battleResult.Rewards;
 
 public class MonsterRoom extends JPanel implements ActionListener {
 

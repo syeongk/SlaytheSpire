@@ -1,4 +1,4 @@
-package panels;
+package ui;
 
 import gameEntity.characters.Character;
 import gameEntity.monsters.Monster;

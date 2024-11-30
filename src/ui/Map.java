@@ -1,4 +1,6 @@
-package panels;
+package ui;
+
+import ui.room.MonsterRoom;
 
 import javax.swing.*;
 import java.awt.*;

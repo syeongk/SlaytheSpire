@@ -6,7 +6,6 @@ import characterStatus.Health;
 import characterStatus.Potion;
 import characterStatus.Relic;
 import gameEntity.monsters.Monster;
-import panels.GameOver;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

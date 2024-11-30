@@ -1,4 +1,4 @@
-package panels;
+package ui;
 
 import card.Card;
 import characterStatus.Health;
