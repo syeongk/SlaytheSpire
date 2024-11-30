@@ -1,5 +1,7 @@
 package card;
 
+import gameEntity.monsters.Monster;
+
 import java.util.ArrayList;
 
 public class Card {
@@ -13,6 +15,13 @@ public class Card {
         this.cardType = cardType;
         this.cardEffectList = new ArrayList<>();
         this.energyCost = energyCost;
+    }
+
+    public void activateCard(Monster monster){
+        for (CardEffect cardEffect : cardEffectList){
+            CardEffectType cardEffectType = cardEffect.getCardEffectType();
+            cardEffectType.applyEffect(cardEffect, monster);
+        }
     }
 
     public CardType getCardType() {

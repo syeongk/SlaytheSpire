@@ -1,4 +1,4 @@
-package monsters;
+package gameEntity.monsters;
 
 public enum MonsterRank {
     WEAK,

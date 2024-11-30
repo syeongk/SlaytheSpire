@@ -3,27 +3,28 @@ package panels;
 import card.Card;
 import characterStatus.Health;
 import characterStatus.Potion;
-import characters.Character;
+import gameEntity.characters.Character;
 import javax.swing.*;
 import java.awt.*;
 import java.util.LinkedList;
 
 public class StatusBar extends JPanel {
-
+    private GameState gameState;
     private Character character;
     private Health myHealth;
     private int myMoney;
     private LinkedList<Card> myDeck;
-    private int floor = 1;
+    private int floor;
     private LinkedList<Potion> myPotions;
+    private JLabel healthLabel;
+    private JLabel moneyLabel;
+    private JLabel floorLabel;
 
     public StatusBar(Character character){
-
-        this.character = character;
-        myHealth = this.character.getHealth();
-        myMoney = this.character.getMoney();
-        myDeck = this.character.getDeck();
-        myPotions = this.character.getPotions();
+        myHealth = character.getHealth();
+        myMoney = character.getMoney();
+        myDeck = character.getDeck();
+        myPotions = character.getPotions();
 
         setLayout(new BorderLayout());
 
@@ -53,17 +54,17 @@ public class StatusBar extends JPanel {
 
 
         JLabel healthImageLabel = new JLabel(scaleImage("src/imgs/panelHeart.png"));
-        JLabel healthLabel = new JLabel(myHealth.getCurrentHealth() + "/" + myHealth.getMaxHealth());
+        healthLabel = new JLabel(myHealth.getCurrentHealth() + "/" + myHealth.getMaxHealth());
         healthLabel.setForeground(Color.RED);
         healthLabel.setFont(font);
 
 
         JLabel moneyImageLabel = new JLabel(scaleImage("src/imgs/panelGoldBag.png"));
-        JLabel moneyLabel = new JLabel(Integer.toString(myMoney));
+        moneyLabel = new JLabel(Integer.toString(myMoney));
         moneyLabel.setFont(font);
 
         JLabel floorImageLabel = new JLabel(scaleImage("src/imgs/floor.png"));
-        JLabel floorLabel = new JLabel(floor + "");
+        floorLabel = new JLabel(floor + "");
         floorLabel.setFont(font);
         floorLabel.setForeground(Color.WHITE);
 
@@ -117,5 +118,20 @@ public class StatusBar extends JPanel {
 
         return scaleIcon;
     }
+
+    public void updateStatusBarHealth(){
+        healthLabel.setText(myHealth.getCurrentHealth() + "/" + myHealth.getMaxHealth());
+    }
+
+    public void updateStatusBarMoney(int money) {
+        myMoney += money;
+        moneyLabel.setText(myMoney + "");
+    }
+
+    public void updateStatusBarFloor(){
+        floor += 1;
+        floorLabel.setText(floor + "");
+    }
+
 
 }

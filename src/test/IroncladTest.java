@@ -1,6 +1,6 @@
 package test;
 
-import characters.Ironclad;
+import gameEntity.characters.Ironclad;
 import org.junit.Test;
 import card.Card;
 

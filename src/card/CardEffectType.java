@@ -1,5 +1,9 @@
 package card;
 
+import gameEntity.characters.Character;
+import gameEntity.monsters.Monster;
+import panels.GameState;
+
 public enum CardEffectType {
     // 피해 관련 효과
     DAMAGE,        // 적에게 피해를 입힙니다.
@@ -35,4 +39,15 @@ public enum CardEffectType {
     SUMMON,        // 유닛이나 효과를 소환합니다.
     TRANSFORM,     // 카드를 다른 카드로 변형합니다.
     UPGRADE;       // 카드를 강화합니다.
+
+    public void applyEffect(CardEffect cardEffect , Monster monster){
+        if (this == DAMAGE) {
+            monster.takeDamage(cardEffect.getCardEffectAmount());
+        } else if (this == BLOCK) {
+            GameState gameState = GameState.getInstance();
+            Character character = gameState.getCharacter();
+
+            character.getBlock(cardEffect.getCardEffectAmount());
+        }
+    }
 }

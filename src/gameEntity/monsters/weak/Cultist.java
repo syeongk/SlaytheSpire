@@ -1,12 +1,11 @@
-package monsters.weak;
+package gameEntity.monsters.weak;
 
-import monsters.Monster;
-import monsters.MonsterInterface;
-import monsters.MonsterRank;
+import gameEntity.monsters.Monster;
+import gameEntity.monsters.MonsterRank;
 
 import java.util.Random;
 
-public class Cultist extends Monster implements MonsterInterface {
+public class Cultist extends Monster {
     private boolean ritualActivated;
 
     public Cultist(){
@@ -30,13 +29,13 @@ public class Cultist extends Monster implements MonsterInterface {
     // 턴 수행 첫 턴에는 의식 버프를 활성화만 시키고, 그 이후 턴부턴 버프를 발동(데미지 3 증가)하고 공격
     @Override
     public void performTurn() {
+        monsterTurn += 1;
         if (monsterTurn == 1)
             ritualActivated = true;
         else {
             ritualBuff();
             attack();
         }
-        monsterTurn += 1;
     }
 
 }

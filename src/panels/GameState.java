@@ -1,17 +1,22 @@
 package panels;
 
-import characters.Character;
+import gameEntity.characters.Character;
+import gameEntity.monsters.Monster;
+
+import java.util.LinkedList;
 
 public class GameState {
+
     private static GameState instance;
     private StatusBar statusBar;
     private Character character;
     private int turnCount = 1;
-
+    private LinkedList<Monster> monsters;
 
     private GameState(Character character){
         this.character = character;
-        this.statusBar = new StatusBar(this.character);
+        this.statusBar = new StatusBar(character);
+        this.monsters = new LinkedList<>();
     }
 
     public static GameState getInstance(Character character){
@@ -39,4 +44,25 @@ public class GameState {
     public Character getCharacter(){
         return character;
     }
+    public int getTurnCount() {
+        return turnCount;
+    }
+
+    public void setTurnCount(int turnCount) {
+        this.turnCount = turnCount;
+    }
+
+    public LinkedList<Monster> getMonsters() {
+        return monsters;
+    }
+
+    public void removeMonster(Monster monster){
+        monsters.remove(monster);
+    }
+
+    public static void setInstance(GameState instance) {
+        GameState.instance = instance;
+    }
+
+
 }

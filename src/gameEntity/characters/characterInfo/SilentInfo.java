@@ -1,4 +1,4 @@
-package characters.characterInfo;
+package gameEntity.characters.characterInfo;
 
 import characterStatus.Health;
 import characterStatus.Relic;

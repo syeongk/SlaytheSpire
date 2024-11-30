@@ -1,20 +1,17 @@
-package monsters.weak;
+package gameEntity.monsters.weak;
 
-import characters.Character;
-import monsters.Monster;
-import monsters.MonsterInterface;
-import monsters.MonsterRank;
+import gameEntity.characters.Character;
+import gameEntity.monsters.Monster;
+import gameEntity.monsters.MonsterRank;
 
 import card.Card;
 
-import java.util.ArrayDeque;
-import java.util.Queue;
 import java.util.Stack;
 
 import static card.CardType.StatusEffect;
 import static statusEffect.StatusType.Weak;
 
-public class SlimeM extends Monster implements MonsterInterface {
+public class SlimeM extends Monster {
 
     Stack<Integer> usedSkills = new Stack<>(); //1:lick, 2:tackle, 3:corrosiveSpit
 
@@ -32,11 +29,13 @@ public class SlimeM extends Monster implements MonsterInterface {
         statusEffect[0] = Weak;
         statusEffect[1] = 1;
         usedSkills.push(1);
+        System.out.println("lick");
         return statusEffect;
     }
 
     public void tackle(){
         attack();
+        System.out.println("tackle");
         usedSkills.push(2);
     }
 
@@ -45,7 +44,8 @@ public class SlimeM extends Monster implements MonsterInterface {
 
         Character character = gameState.getCharacter();
         Card slime = new Card("슬라임", StatusEffect, 1);
-        character.addDiscardPile(slime);
+        character.addTemporaryPile(slime);
+        System.out.println("corrosiveSpit");
         usedSkills.push(3);
     }
 
@@ -58,18 +58,14 @@ public class SlimeM extends Monster implements MonsterInterface {
             if (selection <= 30 && usedSkillsCheck(3)){
                 corrosiveSpit();
                 break;
-            } else if (selection <= 70 && usedSkillsCheck(2)){
+            } else if (selection > 30 && selection <= 70 && usedSkillsCheck(2)){
                 tackle();
                 break;
-            } else if (selection <= 100 && usedSkillsCheck(1)){
+            } else if (selection > 70 && selection <= 100 && usedSkillsCheck(1)){
                 lick();
                 break;
             }
         }
-        for (int skill : usedSkills){
-            System.out.println(skill);
-        }
-
     }
 
     public boolean usedSkillsCheck(int skill){

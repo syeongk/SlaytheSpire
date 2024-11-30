@@ -1,4 +1,4 @@
-package characters;
+package gameEntity.characters;
 
 import card.Card;
 import card.CardEffect;
@@ -9,7 +9,7 @@ import static card.CardType.Attack;
 import static card.CardType.Skill;
 
 
-public class Ironclad extends Character{
+public class Ironclad extends Character {
 
     public Ironclad(){
         super("아이언 클래드", 99, 80, 80, new Relic("불타는 혈액", "전투 종료 시 체력을 6 회복합니다."), "src/imgs/ironclad.png");    //부모 생성자 호출 : 선택된 캐릭터 이름, 현재 체력, 최대 체력, 에너지

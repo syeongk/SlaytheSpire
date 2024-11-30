@@ -1,16 +1,15 @@
-package characters;
+package gameEntity.characters;
 
 import card.Card;
 import characterStatus.Energy;
 import characterStatus.Health;
 import characterStatus.Potion;
 import characterStatus.Relic;
-import panels.GameState;
-import statusEffect.StatusEffect;
+import gameEntity.monsters.Monster;
+import panels.GameOver;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.PriorityQueue;
 import java.util.TreeMap;
 
 public abstract class Character {
@@ -24,6 +23,7 @@ public abstract class Character {
     protected LinkedList<Card> handPile;
     protected LinkedList<Card> drawPile;
     protected LinkedList<Card> discardPile;
+    protected LinkedList<Card> temporaryPile;
     protected LinkedList<Card> exhaustedPile;
     private Energy energy;
     private TreeMap<String, Integer> statusEffects;
@@ -31,6 +31,7 @@ public abstract class Character {
     private final int y = 350;
     private int block;
     private String imagePath;
+    private int cardCount = 5;
 
     protected Character(String characterName, int money, int currentHealth, int maxHealth, Relic relic, String imagePath){
         this.characterName = characterName;
@@ -42,6 +43,7 @@ public abstract class Character {
         this.handPile = new LinkedList<>();
         this.drawPile = new LinkedList<>();
         this.discardPile = new LinkedList<>();
+        this.temporaryPile = new LinkedList<>();
         this.exhaustedPile = new LinkedList<>();
         this.energy = new Energy(3);
         this.statusEffects = new TreeMap<>();
@@ -52,12 +54,26 @@ public abstract class Character {
 
     abstract void initDeck();
 
-    public void takeDamage(int damage){
+    public void takeDamage(int damage) {
         int currentHealth = health.getCurrentHealth();
 
-        if (block - damage < 0)
+        if (block - damage < 0) {
             health.setCurrentHealth(currentHealth + (block - damage));
+        }
+    }
 
+    public void getBlock(int block){
+        this.block += block;
+    }
+
+    public void useCard(Card card, Monster monster){
+        if(energy.getCurrentEnergy() - card.getEnergyCost() >= 0){
+            handPile.remove(card);
+            discardPile.add(card);
+            energy.setCurrentEnergy(energy.getCurrentEnergy() - card.getEnergyCost());
+
+            card.activateCard(monster);
+        }
     }
 
     //abstract void performTurn();
@@ -117,8 +133,8 @@ public abstract class Character {
         return discardPile;
     }
 
-    public void addDiscardPile(Card card) {
-        this.getDiscardPile().add(card);
+    public void addTemporaryPile(Card card) {
+        this.getTemporaryPile().add(card);
     }
 
     public LinkedList<Card> getDrawPile() {
@@ -169,4 +185,15 @@ public abstract class Character {
         return statusEffects;
     }
 
+    public int getCardCount() {
+        return this.cardCount;
+    }
+
+    public LinkedList<Card> getTemporaryPile() {
+        return temporaryPile;
+    }
+
+    public void setTemporaryPile(LinkedList<Card> temporaryPile) {
+        this.temporaryPile = temporaryPile;
+    }
 }

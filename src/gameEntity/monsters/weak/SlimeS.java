@@ -1,14 +1,13 @@
-package monsters.weak;
+package gameEntity.monsters.weak;
 
-import monsters.Monster;
-import monsters.MonsterInterface;
-import monsters.MonsterRank;
+import gameEntity.monsters.Monster;
+import gameEntity.monsters.MonsterRank;
 
 import java.util.Stack;
 
 import static statusEffect.StatusType.Weak;
 
-public class SlimeS extends Monster implements MonsterInterface {
+public class SlimeS extends Monster {
 
     Stack<Integer> stack = new Stack<>();
 
@@ -25,20 +24,24 @@ public class SlimeS extends Monster implements MonsterInterface {
         Object[] statusEffect = new Object[2];
         statusEffect[0] = Weak;
         statusEffect[1] = 1;
+        System.out.println("lick");
+        stack.push(1);
         return statusEffect;
     }
 
     public void tackle(){
         attack();
+        stack.push(2);
+        System.out.println("tackle");
     }
 
     public void performTurn(){
+        monsterTurn += 1;
         if (monsterTurn == 1){
             int selection = r.nextInt(1,3);
 
             if (selection == 1){
                 lick();
-                stack.push(1);
             } else {
                 tackle();
                 stack.push(2);

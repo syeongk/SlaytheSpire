@@ -1,7 +1,7 @@
-package monsters;
+package gameEntity.monsters;
 
 import characterStatus.Health;
-import characters.Character;
+import gameEntity.characters.Character;
 import panels.GameState;
 import statusEffect.StatusEffect;
 
@@ -16,7 +16,7 @@ public abstract class Monster {
     protected MonsterRank type; //약한, 강한, 보스
     protected PriorityQueue<StatusEffect> statusEffect; //상태 이상
     protected String imagePath;
-    protected int monsterTurn = 1;
+    protected int monsterTurn = 0;
     protected int block = 0;
     protected int strength = 0;
     protected static Random r = new Random();
@@ -35,10 +35,29 @@ public abstract class Monster {
         this.y = y;
     }
 
+    public abstract void performTurn();
 
     public void attack(){
         Character character = gameState.getCharacter();
         character.takeDamage(damage + strength);
+    }
+
+    public void takeDamage(int damage) {
+
+        if (block - damage < 0) {
+            health.setCurrentHealth(health.getCurrentHealth() + (block - damage));
+            block = 0;
+        } else if (block - damage >= 0){
+            block -= damage;
+        }
+
+        if (health.getCurrentHealth() <= 0) {
+            die();
+        }
+    }
+
+    public void die() {
+        gameState.removeMonster(this);
     }
 
     public Health getHealth() {
@@ -95,6 +114,14 @@ public abstract class Monster {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    public int getBlock() {
+        return block;
+    }
+
+    public void setBlock(int block) {
+        this.block = block;
     }
 
 

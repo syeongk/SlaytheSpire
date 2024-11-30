@@ -1,8 +1,8 @@
 package panels;
 
-import characters.*;
-import characters.Character;
-import characters.characterInfo.*;
+import gameEntity.characters.*;
+import gameEntity.characters.Character;
+import gameEntity.characters.characterInfo.*;
 import characterStatus.Relic;
 
 import javax.swing.*;
@@ -49,13 +49,13 @@ public class CharacterSelection extends JPanel implements ActionListener {
 
     Font font;
 
-    public CharacterSelection(JPanel mainPanel) throws IOException, FontFormatException {
+    public CharacterSelection() throws IOException, FontFormatException {
         this.mainPanel = mainPanel;
 
         File fontFile = new File("src/font/GyeonggiCheonnyeonBatangBold.ttf");
 
         setLayout(new BorderLayout());
-        backgroundImage = new ImageIcon(getClass().getResource("/images/ui/charSelect/ironcladPortrait.jpg"));
+        backgroundImage = new ImageIcon("src/imgs/ironcladPortrait.jpg");
         JPanel backgroundPanel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -182,19 +182,19 @@ public class CharacterSelection extends JPanel implements ActionListener {
         if (e.getSource() == ironclad) {
             // TODO: 아이언 클래드 정보
             selectedCharacter = 0;
-            backgroundImage = new ImageIcon(getClass().getResource("/images/ui/charSelect/ironcladPortrait.jpg"));
+            backgroundImage = new ImageIcon("src/imgs/ironcladPortrait.jpg");
             repaint();
         } else if (e.getSource() == silent){
             selectedCharacter = 1;
-            backgroundImage = new ImageIcon(getClass().getResource("/images/ui/charSelect/silentPortrait.jpg"));
+            backgroundImage = new ImageIcon("src/imgs/silentPortrait.jpg");
             repaint();
         } else if (e.getSource() == defect){
             selectedCharacter = 2;
-            backgroundImage = new ImageIcon(getClass().getResource("/images/ui/charSelect/defectPortrait.jpg"));
+            backgroundImage = new ImageIcon("src/imgs/defectPortrait.jpg");
             repaint();
         } else if (e.getSource() == watcher){
             selectedCharacter = 3;
-            backgroundImage = new ImageIcon(getClass().getResource("/images/ui/charSelect/watcherPortrait.jpg"));
+            backgroundImage = new ImageIcon("src/imgs/watcherPortrait.jpg");
             repaint();
         }
         setCharacterLabels(selectedCharacter);
@@ -212,15 +212,15 @@ public class CharacterSelection extends JPanel implements ActionListener {
                 character = new Watcher();
             }
 
-            gameState = getInstance(character);
-            Map map = new Map();
-            cardPanel.add(map, "panels.Map");
-            cardLayout.show(cardPanel, "panels.Map");
+            gameState = GameState.getInstance(character);
+
+            MainFrame.addPanel(new Map(),"Map");
+            MainFrame.switchPanel("Map");
         }
 
         //뒤로 버튼
         if (e.getSource() == cancel){
-            //cardLayout.show(cardPanel, "GameStart");
+            MainFrame.switchPanel("Main");
         }
     }
 
