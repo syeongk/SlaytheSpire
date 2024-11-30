@@ -45,6 +45,7 @@ public class SlimeM extends Monster {
         Character character = gameState.getCharacter();
         Card slime = new Card("슬라임", StatusEffect, 1);
         character.addTemporaryPile(slime);
+        character.temporaryCardToDiscardPile(slime);
         System.out.println("corrosiveSpit");
         usedSkills.push(3);
     }

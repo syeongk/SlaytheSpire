@@ -8,6 +8,7 @@ import characterStatus.Relic;
 import gameEntity.monsters.Monster;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.TreeMap;
 
@@ -75,6 +76,30 @@ public abstract class Character {
         }
     }
 
+    public void addTemporaryPile(Card card) {
+        temporaryPile.add(card);
+    }
+
+    public void temporaryCardToDiscardPile(Card card){
+        discardPile.add(card);
+    }
+
+    //drawPile 에 있는 임시카드들 모두 삭제하고, temporaryPile 카드 모두 삭제한다.
+    public void clearTemporaryCards(){
+        for (Card temporaryCard : temporaryPile){
+            Iterator<Card> iterator = drawPile.iterator();
+            while (iterator.hasNext()){
+                Card drawCard = iterator.next();
+                if (drawCard.equals(temporaryCard)) {
+                    iterator.remove();
+                    break;
+                }
+            }
+        }
+        temporaryPile.clear();
+
+    }
+
     //abstract void performTurn();
     //abstract void attack();
     //abstract void buff();
@@ -132,9 +157,6 @@ public abstract class Character {
         return discardPile;
     }
 
-    public void addTemporaryPile(Card card) {
-        this.getTemporaryPile().add(card);
-    }
 
     public LinkedList<Card> getDrawPile() {
         return drawPile;

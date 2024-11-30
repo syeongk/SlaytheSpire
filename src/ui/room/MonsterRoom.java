@@ -156,9 +156,16 @@ public class MonsterRoom extends JPanel implements ActionListener {
                        handPileToDiscardPile(new Runnable() {
                            @Override
                            public void run() {
-                               discardPileToDrawPile();
+                               discardPileToDrawPile(new Runnable(){
+                                   @Override
+                                   public void run() {
+                                       character.clearTemporaryCards();
+                                   }
+                               });
                            }
                        });
+
+
                        Energy energy = character.getEnergy();
                        energy.setCurrentEnergy(energy.getMaxEnergy());
 
@@ -191,7 +198,7 @@ public class MonsterRoom extends JPanel implements ActionListener {
 
         timer = new Timer(100, e->{
             discardPile.add(handPile.removeFirst());
-            handCount--;
+            handCount -= 1;
             repaint();
 
             if(handCount <= 0){
@@ -205,13 +212,15 @@ public class MonsterRoom extends JPanel implements ActionListener {
     }
 
     //(뽑을 카드 목록이 비었을 때) 버린 카드에 있는 모든 카드 -> 뽑을 카드 목록으로
-    public void discardPileToDrawPile(){
+    public void discardPileToDrawPile(Runnable onComplete){
         Collections.shuffle(discardPile);
 
         drawPile.addAll(discardPile);
         discardPile.clear();
         discardCount--;
         repaint();
+
+        onComplete.run();
     }
 
     //(내 턴 시작 시) 뽑을 카드에 있는 일부 카드 -> 손에 있는 카드 목록으로
@@ -219,16 +228,17 @@ public class MonsterRoom extends JPanel implements ActionListener {
         cardCount = character.getCardCount();
 
         if (gameState.isMyTurn()){
-            if (drawPile.isEmpty()){
-                discardPileToDrawPile();
-            }
 
             Collections.shuffle(drawPile);
 
             timer = new Timer(100, e->{
-                handPile.add(drawPile.removeFirst());
-                cardCount--;
-                repaint();
+                if (drawPile.isEmpty()){
+                    discardPileToDrawPile(() -> { });
+                } else {
+                    handPile.add(drawPile.removeFirst());
+                    cardCount--;
+                    repaint();
+                }
 
                 if(cardCount <= 0){
                     ((Timer) e.getSource()).stop();
@@ -443,7 +453,7 @@ public class MonsterRoom extends JPanel implements ActionListener {
 
                     //캐릭터 턴
                     if (drawPile.isEmpty()){
-                        discardPileToDrawPile();
+                        discardPileToDrawPile(() -> {});
                     }
                     gameState.setTurnCount(gameState.getTurnCount()+1);
                     drawCards(new Runnable(){
