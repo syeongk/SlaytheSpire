@@ -19,11 +19,17 @@ public class Cultist extends Monster {
         return r.nextInt(48,55);
     }
 
+    public void darkStrike(){
+        attack();
+        System.out.println("darkStrike");
+    }
 
     // 의식 버프 발동 - 데미지 3 증가
     public void ritualBuff() {
-        if (ritualActivated)
+        if (ritualActivated) {
             damage += 3;
+            System.out.println("ritualBuff");
+        }
     }
 
     // 턴 수행 첫 턴에는 의식 버프를 활성화만 시키고, 그 이후 턴부턴 버프를 발동(데미지 3 증가)하고 공격
@@ -34,7 +40,7 @@ public class Cultist extends Monster {
             ritualActivated = true;
         else {
             ritualBuff();
-            attack();
+            darkStrike();
         }
     }
 

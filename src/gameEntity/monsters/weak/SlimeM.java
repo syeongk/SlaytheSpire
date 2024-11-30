@@ -17,7 +17,6 @@ public class SlimeM extends Monster {
 
     public SlimeM(){
         super(initHealth(), MonsterRank.WEAK, "src/imgs/slimeM.png", 950, 350);
-        damage = 10;
     }
 
     public static int initHealth(){
@@ -34,12 +33,14 @@ public class SlimeM extends Monster {
     }
 
     public void tackle(){
+        damage = 10;
         attack();
         System.out.println("tackle");
         usedSkills.push(2);
     }
 
     public void corrosiveSpit(){
+        damage = 7;
         attack();
 
         Character character = gameState.getCharacter();
