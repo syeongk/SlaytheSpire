@@ -7,7 +7,8 @@ import java.util.ArrayDeque;
 import java.util.Queue;
 import java.util.Stack;
 
-import static statusEffect.StatusType.Weak;
+import static statusEffect.StatusEffect.Block;
+import static statusEffect.StatusEffect.Weak;
 
 public class LouseR extends Monster {
     private boolean damaged = false; //데미지 받았는지 기록
@@ -22,13 +23,10 @@ public class LouseR extends Monster {
         return r.nextInt(11,18);
     }
 
-    public Object[] spiteWeb(){
-        Object[] statusEffect = new Object[2];
-        statusEffect[0] = Weak;
-        statusEffect[1] = 2;
+    public void spiteWeb(){
+        character.addStatusEffect(Weak, 2);
         usedSkills.push(1);
         System.out.println("spiteWeb");
-        return statusEffect;
     }
 
     public void bite(){
@@ -39,12 +37,12 @@ public class LouseR extends Monster {
 
 
     public void curlUp(){
-        block += r.nextInt(3,8);
+        statusEffects.put(Block, statusEffects.get(Block) + r.nextInt(3,8));
         System.out.println("curlUp");
     }
 
     public void performTurn(){
-        block = 0;
+        statusEffects.put(Block, 0);
         if (damaged){
             curlUp();
         }
@@ -59,6 +57,7 @@ public class LouseR extends Monster {
                 break;
             }
         }
+        endTurn();
 
     }
 

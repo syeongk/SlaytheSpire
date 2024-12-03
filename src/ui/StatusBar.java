@@ -133,5 +133,9 @@ public class StatusBar extends JPanel {
         floorLabel.setText(floor + "");
     }
 
+    public int getFloor() {
+        return floor;
+    }
+
 
 }

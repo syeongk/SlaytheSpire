@@ -5,7 +5,7 @@ import gameEntity.monsters.MonsterRank;
 
 import java.util.Stack;
 
-import static statusEffect.StatusType.Weak;
+import static statusEffect.StatusEffect.Weak;
 
 public class SlimeS extends Monster {
 
@@ -20,13 +20,10 @@ public class SlimeS extends Monster {
         return r.nextInt(8,12);
     }
 
-    public Object[] lick(){
-        Object[] statusEffect = new Object[2];
-        statusEffect[0] = Weak;
-        statusEffect[1] = 1;
+    public void lick(){
+        character.addStatusEffect(Weak, 2);
         System.out.println("lick");
         stack.push(1);
-        return statusEffect;
     }
 
     public void tackle(){
@@ -56,5 +53,6 @@ public class SlimeS extends Monster {
                 stack.push(1);
             }
         }
+        endTurn();
     }
 }

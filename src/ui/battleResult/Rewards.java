@@ -47,6 +47,9 @@ public class Rewards extends JPanel {
         super.paintComponent(g);
         g.drawImage(rewardSheetImageIcon.getImage(), 800 - (rewardSheetImageIcon.getIconWidth() / 2), 150 , null);
         g.drawImage(bannerImageIcon.getImage(), 800 - (bannerImageIcon.getIconWidth() / 2), 100, null);
+        g.setColor(Color.BLACK);
+        g.setFont(MainFrame.font);
+        g.drawString("전리품!", 750, 190);
     }
 
     public ImageIcon scaleImage(String imagePath, int w, int h){

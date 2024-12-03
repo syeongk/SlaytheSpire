@@ -5,6 +5,8 @@ import gameEntity.monsters.MonsterRank;
 
 import java.util.Random;
 
+import static statusEffect.StatusEffect.Strength;
+
 public class Cultist extends Monster {
     private boolean ritualActivated;
 
@@ -27,7 +29,7 @@ public class Cultist extends Monster {
     // 의식 버프 발동 - 데미지 3 증가
     public void ritualBuff() {
         if (ritualActivated) {
-            damage += 3;
+            statusEffects.put(Strength, statusEffects.get(Strength) + 3);
             System.out.println("ritualBuff");
         }
     }
@@ -42,6 +44,8 @@ public class Cultist extends Monster {
             ritualBuff();
             darkStrike();
         }
+        endTurn();
     }
+
 
 }

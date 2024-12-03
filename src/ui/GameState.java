@@ -12,6 +12,9 @@ public class GameState {
     private Character character;
     private int turnCount = 1;
     private LinkedList<Monster> monsters;
+    private int killedMonsters;
+    private int killedElites;
+    private int killedBosses;
 
     private GameState(Character character){
         this.character = character;
@@ -64,5 +67,27 @@ public class GameState {
         GameState.instance = instance;
     }
 
+    public int getKilledElites() {
+        return killedElites;
+    }
 
+    public void setKilledElites(int killedElites) {
+        this.killedElites = killedElites;
+    }
+
+    public int getKilledBosses() {
+        return killedBosses;
+    }
+
+    public void setKilledBosses(int killedBosses) {
+        this.killedBosses = killedBosses;
+    }
+
+    public int getKilledMonsters() {
+        return killedMonsters;
+    }
+
+    public void setKilledMonsters(int killedMonsters) {
+        this.killedMonsters = killedMonsters;
+    }
 }

@@ -2,7 +2,12 @@ package card;
 
 import gameEntity.characters.Character;
 import gameEntity.monsters.Monster;
+import statusEffect.StatusEffect;
 import ui.GameState;
+
+import java.util.HashMap;
+
+import static statusEffect.StatusEffect.*;
 
 public enum CardEffectType {
     // 피해 관련 효과
@@ -40,14 +45,24 @@ public enum CardEffectType {
     TRANSFORM,     // 카드를 다른 카드로 변형합니다.
     UPGRADE;       // 카드를 강화합니다.
 
-    public void applyEffect(CardEffect cardEffect , Monster monster){
+    public void applyEffect(CardEffect cardEffect , Monster monster, HashMap<StatusEffect, Integer> statusEffects){
         if (this == DAMAGE) {
-            monster.takeDamage(cardEffect.getCardEffectAmount());
-        } else if (this == BLOCK) {
-            GameState gameState = GameState.getInstance();
-            Character character = gameState.getCharacter();
+            int value = cardEffect.getCardEffectAmount();
+            if (statusEffects.get(Weak) > 0){
+                value = (int) Math.round(value * 0.25);
+            }
+            if (statusEffects.get(Strength) > 0){
+                value += statusEffects.get(Strength);
+            }
+            monster.takeDamage(value);
+        } else if (this == VULNERABLE) {
+            monster.addStatusEffect(Vulnerable, cardEffect.getCardEffectAmount());
+        }
+    }
 
-            character.getBlock(cardEffect.getCardEffectAmount());
+    public void applyEffect(CardEffect cardEffect, Character character){
+        if (this == BLOCK) {
+            character.getStatusEffects().put(Block, character.getStatusEffects().get(Block) + cardEffect.getCardEffectAmount());
         }
     }
 }

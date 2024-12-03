@@ -5,6 +5,9 @@ import gameEntity.monsters.MonsterRank;
 
 import java.util.*;
 
+import static statusEffect.StatusEffect.Block;
+import static statusEffect.StatusEffect.Strength;
+
 public class JawWorm extends Monster {
     Stack<Integer> usedSkills = new Stack<>(); //1:bellow, 2:thrash, 3:chomp
 
@@ -26,7 +29,7 @@ public class JawWorm extends Monster {
 
     //공격 & 방어
     public void thrash(){
-        block += 5;
+        statusEffects.put(Block, statusEffects.get(Block) + 5);
         damage = 7;
 
         attack();
@@ -36,8 +39,8 @@ public class JawWorm extends Monster {
 
     //힘 & 방어
     public void bellow(){
-        strength += 3;
-        block += 6;
+        statusEffects.put(Strength, statusEffects.get(Strength) + 3);
+        statusEffects.put(Block, statusEffects.get(Block) + 6);
         usedSkills.push(1);
         System.out.println("bellow");
     }
@@ -45,7 +48,7 @@ public class JawWorm extends Monster {
     @Override
     public void performTurn() {
         monsterTurn += 1;
-        block = 0;
+        statusEffects.put(Block, 0);
         if (monsterTurn == 1){
             chomp();
         } else {
@@ -64,6 +67,7 @@ public class JawWorm extends Monster {
                 }
             }
         }
+        endTurn();
     }
 
     public boolean usedSkillsCheck(int skill){

@@ -5,50 +5,81 @@ import gameEntity.characters.Character;
 import ui.GameState;
 import statusEffect.StatusEffect;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Random;
 
+import static statusEffect.StatusEffect.*;
 import static ui.GameState.getInstance;
 
 public abstract class Monster {
     protected GameState gameState;
+    protected Character character;
     protected Health health;  //체력
     protected MonsterRank type; //약한, 강한, 보스
-    protected PriorityQueue<StatusEffect> statusEffect; //상태 이상
     protected String imagePath;
     protected int monsterTurn = 0;
-    protected int block = 0;
-    protected int strength = 0;
     protected static Random r = new Random();
     protected int damage = 0;
     protected int x;
     protected int y;
+    protected HashMap<StatusEffect, Integer> statusEffects;
 
 
     public Monster(int health, MonsterRank type, String imagePath, int x, int y){
         this.health = new Health(health, health);
         this.type = type;
-        this.statusEffect = new PriorityQueue<>();
         this.imagePath = imagePath;
         this.gameState = getInstance();
         this.x = x;
         this.y = y;
+        this.statusEffects = new HashMap<>();
+        this.statusEffects.put(Vulnerable, 0);
+        this.statusEffects.put(Weak, 0);
+        this.statusEffects.put(Strength, 0);
+        this.statusEffects.put(Block, 0);
+        character = gameState.getCharacter();
+    }
+
+    public void addStatusEffect(StatusEffect statusEffect, Integer statusEffectAmount){
+        statusEffects.put(statusEffect, statusEffects.get(statusEffect) + statusEffectAmount);
+    }
+
+    public void reduceEffectAmount(){
+        for (StatusEffect statusEffect : statusEffects.keySet()) {
+            int duration = statusEffect.getDuration();
+            if (duration == 1 && statusEffects.get(statusEffect) > 0){
+                statusEffects.put(statusEffect, statusEffects.get(statusEffect) - 1);
+            } else if (duration == 0){
+                statusEffects.put(statusEffect, 0);
+            }
+        }
+    }
+
+    public void endTurn(){
+        reduceEffectAmount();
     }
 
     public abstract void performTurn();
 
-    public void attack(){
-        Character character = gameState.getCharacter();
-        character.takeDamage(damage + strength);
+
+    public int attack(){
+        character.takeDamage(damage + statusEffects.get(Strength));
+
+        return damage + statusEffects.get(Strength);
     }
 
     public void takeDamage(int damage) {
+        if (statusEffects.get(Vulnerable) > 0) {
+            damage = (int) Math.round(damage * 1.5);
+        }
 
-        if (block - damage < 0) {
-            health.setCurrentHealth(health.getCurrentHealth() + (block - damage));
-            block = 0;
-        } else if (block - damage >= 0){
-            block -= damage;
+        if (statusEffects.get(Block) - damage < 0) {
+            health.setCurrentHealth(health.getCurrentHealth() + (statusEffects.get(Block) - damage));
+            statusEffects.put(Block, 0);
+        } else if (statusEffects.get(Block) - damage >= 0){
+            statusEffects.put(Block, statusEffects.get(Block) - damage);
         }
 
         if (health.getCurrentHealth() <= 0) {
@@ -93,13 +124,6 @@ public abstract class Monster {
         this.type = type;
     }
 
-    public PriorityQueue<StatusEffect> getStatusEffect() {
-        return statusEffect;
-    }
-    public void setStatusEffect(PriorityQueue<StatusEffect> statusEffect) {
-        this.statusEffect = statusEffect;
-    }
-
     public int getX() {
         return x;
     }
@@ -116,14 +140,17 @@ public abstract class Monster {
         this.y = y;
     }
 
-    public int getBlock() {
-        return block;
+    public int getDamage() {
+        return damage;
     }
 
-    public void setBlock(int block) {
-        this.block = block;
+    public void setDamage(int damage) {
+        this.damage = damage;
     }
 
+    public HashMap<StatusEffect, Integer> getStatusEffects() {
+        return statusEffects;
+    }
 
 
 }

@@ -6,11 +6,11 @@ import characterStatus.Health;
 import characterStatus.Potion;
 import characterStatus.Relic;
 import gameEntity.monsters.Monster;
+import statusEffect.StatusEffect;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.TreeMap;
+import java.util.*;
+
+import static statusEffect.StatusEffect.*;
 
 public abstract class Character {
     private static Character instance;
@@ -26,12 +26,12 @@ public abstract class Character {
     protected LinkedList<Card> temporaryPile;
     protected LinkedList<Card> exhaustedPile;
     private Energy energy;
-    private TreeMap<String, Integer> statusEffects;
     private final int x = 250;
     private final int y = 350;
-    private int block;
     private String imagePath;
     private int cardCount = 5;
+
+    protected HashMap<StatusEffect, Integer> statusEffects;
 
     protected Character(String characterName, int money, int currentHealth, int maxHealth, Relic relic, String imagePath){
         this.characterName = characterName;
@@ -46,24 +46,50 @@ public abstract class Character {
         this.temporaryPile = new LinkedList<>();
         this.exhaustedPile = new LinkedList<>();
         this.energy = new Energy(3);
-        this.statusEffects = new TreeMap<>();
         this.imagePath = imagePath;
-        this.block = 0;
+        this.statusEffects = new HashMap<>();
+        this.statusEffects.put(Vulnerable, 0);
+        this.statusEffects.put(Weak, 0);
+        this.statusEffects.put(Strength, 0);
+        this.statusEffects.put(Block, 0);
     }
 
+
+    public void addStatusEffect(StatusEffect statusEffect, Integer statusEffectAmount){
+        statusEffects.put(statusEffect, statusEffects.get(statusEffect) + statusEffectAmount);
+    }
+
+    public void reduceEffectAmount(){
+        for (StatusEffect statusEffect : statusEffects.keySet()) {
+            int duration = statusEffect.getDuration();
+            if (duration == 1 && statusEffects.get(statusEffect) > 0){
+                statusEffects.put(statusEffect, statusEffects.get(statusEffect) - 1);
+            } else if (duration == 0){
+                statusEffects.put(statusEffect, 0);
+            }
+        }
+    }
+
+    public void endBattle(){
+        energy.setCurrentEnergy(energy.getMaxEnergy());
+
+        statusEffects.put(Vulnerable, 0);
+        statusEffects.put(Weak, 0);
+        statusEffects.put(Strength, 0);
+        statusEffects.put(Block, 0);
+    }
 
     abstract void initDeck();
 
     public void takeDamage(int damage) {
         int currentHealth = health.getCurrentHealth();
 
-        if (block - damage < 0) {
-            health.setCurrentHealth(currentHealth + (block - damage));
+        if (statusEffects.get(Block) - damage <= 0) {
+            health.setCurrentHealth(currentHealth + (statusEffects.get(Block) - damage));
+            statusEffects.put(Block, 0);
+        } else {
+            statusEffects.put(Block, statusEffects.get(Block) - damage);
         }
-    }
-
-    public void getBlock(int block){
-        this.block += block;
     }
 
     public void useCard(Card card, Monster monster){
@@ -72,8 +98,19 @@ public abstract class Character {
             discardPile.add(card);
             energy.setCurrentEnergy(energy.getCurrentEnergy() - card.getEnergyCost());
 
-            card.activateCard(monster);
+            card.activateCard(monster, statusEffects);
         }
+    }
+
+    public void useCard(Card card){
+        if(energy.getCurrentEnergy() - card.getEnergyCost() >= 0){
+            handPile.remove(card);
+            discardPile.add(card);
+            energy.setCurrentEnergy(energy.getCurrentEnergy() - card.getEnergyCost());
+
+            card.activateCard(this);
+        }
+
     }
 
     public void addTemporaryPile(Card card) {
@@ -202,7 +239,7 @@ public abstract class Character {
         return imagePath;
     }
 
-    public TreeMap<String, Integer> getStatusEffects() {
+    public HashMap<StatusEffect, Integer> getStatusEffects() {
         return statusEffects;
     }
 
@@ -217,4 +254,5 @@ public abstract class Character {
     public void setTemporaryPile(LinkedList<Card> temporaryPile) {
         this.temporaryPile = temporaryPile;
     }
+
 }

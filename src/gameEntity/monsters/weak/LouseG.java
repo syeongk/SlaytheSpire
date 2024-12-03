@@ -6,6 +6,9 @@ import gameEntity.monsters.MonsterRank;
 import java.util.ArrayDeque;
 import java.util.Stack;
 
+import static statusEffect.StatusEffect.Block;
+import static statusEffect.StatusEffect.Strength;
+
 public class LouseG extends Monster {
     private boolean damaged = false; //데미지 받았는지 기록
     Stack<Integer> usedSkills = new Stack<>(); // grow : 1, bite : 2
@@ -20,7 +23,7 @@ public class LouseG extends Monster {
     }
 
     public void grow(){
-        strength += 3;
+        statusEffects.put(Strength, statusEffects.get(Strength) + 3);
         usedSkills.push(1);
         System.out.println("grow");
     }
@@ -32,12 +35,12 @@ public class LouseG extends Monster {
     }
 
     public void curlUp(){
-        block += r.nextInt(3,8);
+        statusEffects.put(Block, statusEffects.get(Block) + r.nextInt(3,8));
         System.out.println("curlUp");
     }
 
     public void performTurn(){
-        block = 0;
+        statusEffects.put(Block, 0);
         if (damaged){
             curlUp();
         }
@@ -52,6 +55,7 @@ public class LouseG extends Monster {
                 break;
             }
         }
+        endTurn();
 
     }
 

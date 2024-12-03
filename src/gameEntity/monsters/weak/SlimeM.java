@@ -1,5 +1,7 @@
 package gameEntity.monsters.weak;
 
+import card.CardTarget;
+import card.CardType;
 import gameEntity.characters.Character;
 import gameEntity.monsters.Monster;
 import gameEntity.monsters.MonsterRank;
@@ -8,8 +10,9 @@ import card.Card;
 
 import java.util.Stack;
 
+import static card.CardTarget.None;
 import static card.CardType.StatusEffect;
-import static statusEffect.StatusType.Weak;
+import static statusEffect.StatusEffect.Weak;
 
 public class SlimeM extends Monster {
 
@@ -23,13 +26,10 @@ public class SlimeM extends Monster {
         return r.nextInt(28,33);
     }
 
-    public Object[] lick(){
-        Object[] statusEffect = new Object[2];
-        statusEffect[0] = Weak;
-        statusEffect[1] = 1;
+    public void lick(){
+        character.addStatusEffect(Weak, 2);
         usedSkills.push(1);
         System.out.println("lick");
-        return statusEffect;
     }
 
     public void tackle(){
@@ -43,8 +43,8 @@ public class SlimeM extends Monster {
         damage = 7;
         attack();
 
-        Character character = gameState.getCharacter();
-        Card slime = new Card("슬라임", StatusEffect, 1);
+        CardTarget[] cardTarget = new CardTarget[]{None};
+        Card slime = new Card("슬라임", StatusEffect, 1, cardTarget);
         character.addTemporaryPile(slime);
         character.temporaryCardToDiscardPile(slime);
         System.out.println("corrosiveSpit");
@@ -68,6 +68,7 @@ public class SlimeM extends Monster {
                 break;
             }
         }
+        endTurn();
     }
 
     public boolean usedSkillsCheck(int skill){
