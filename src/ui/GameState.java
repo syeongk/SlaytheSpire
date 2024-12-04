@@ -1,5 +1,6 @@
 package ui;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import gameEntity.characters.Character;
 import gameEntity.monsters.Monster;
 
@@ -8,9 +9,11 @@ import java.util.LinkedList;
 public class GameState {
 
     private static GameState instance;
+    @JsonIgnore
     private StatusBar statusBar;
     private Character character;
     private int turnCount = 1;
+    private int floor;
     private LinkedList<Monster> monsters;
     private int killedMonsters;
     private int killedElites;
@@ -89,5 +92,13 @@ public class GameState {
 
     public void setKilledMonsters(int killedMonsters) {
         this.killedMonsters = killedMonsters;
+    }
+
+    public int getFloor() {
+        return floor;
+    }
+
+    public void setFloor(int floor) {
+        this.floor = floor;
     }
 }

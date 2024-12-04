@@ -1,11 +1,16 @@
 package ui;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import json.SaveData;
 import ui.room.MonsterRoom;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 public class Map extends JPanel implements ActionListener {
 
@@ -32,7 +37,17 @@ public class Map extends JPanel implements ActionListener {
             MonsterRoom monsterRoom = new MonsterRoom();
             MainFrame.addPanel(monsterRoom, "MonsterRoom");
             MainFrame.switchPanel("MonsterRoom");
+            gameState.setFloor(gameState.getFloor()+1);
             gameState.getStatusBar().updateStatusBarFloor();
+
+            ObjectMapper mapper = new ObjectMapper();
+            SaveData saveData = new SaveData();
+            try {
+                File file = new File("saveData.json");
+                mapper.writerWithDefaultPrettyPrinter().writeValue(file, saveData);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         }
     }
 

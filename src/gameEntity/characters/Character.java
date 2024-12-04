@@ -13,7 +13,6 @@ import java.util.*;
 import static statusEffect.StatusEffect.*;
 
 public abstract class Character {
-    private static Character instance;
     private String characterName;
     private Health health;
     private int money;

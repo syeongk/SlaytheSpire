@@ -1,0 +1,270 @@
+{
+  "gameState" : {
+    "character" : {
+      "characterName" : "아이언 클래드",
+      "health" : {
+        "currentHealth" : 80,
+        "maxHealth" : 80
+      },
+      "money" : 99,
+      "potions" : [ ],
+      "relics" : [ {
+        "name" : "불타는 혈액",
+        "relicContent" : "전투 종료 시 체력을 6 회복합니다."
+      } ],
+      "deck" : [ {
+        "cardName" : "타격",
+        "cardType" : "Attack",
+        "cardEffectList" : [ {
+          "cardEffectType" : "DAMAGE",
+          "cardEffectAmount" : 6,
+          "cardEffectContent" : "피해를 6 줍니다"
+        } ],
+        "energyCost" : 1,
+        "cardTarget" : [ "Monster" ]
+      }, {
+        "cardName" : "타격",
+        "cardType" : "Attack",
+        "cardEffectList" : [ {
+          "cardEffectType" : "DAMAGE",
+          "cardEffectAmount" : 6,
+          "cardEffectContent" : "피해를 6 줍니다"
+        } ],
+        "energyCost" : 1,
+        "cardTarget" : [ "Monster" ]
+      }, {
+        "cardName" : "타격",
+        "cardType" : "Attack",
+        "cardEffectList" : [ {
+          "cardEffectType" : "DAMAGE",
+          "cardEffectAmount" : 6,
+          "cardEffectContent" : "피해를 6 줍니다"
+        } ],
+        "energyCost" : 1,
+        "cardTarget" : [ "Monster" ]
+      }, {
+        "cardName" : "타격",
+        "cardType" : "Attack",
+        "cardEffectList" : [ {
+          "cardEffectType" : "DAMAGE",
+          "cardEffectAmount" : 6,
+          "cardEffectContent" : "피해를 6 줍니다"
+        } ],
+        "energyCost" : 1,
+        "cardTarget" : [ "Monster" ]
+      }, {
+        "cardName" : "타격",
+        "cardType" : "Attack",
+        "cardEffectList" : [ {
+          "cardEffectType" : "DAMAGE",
+          "cardEffectAmount" : 6,
+          "cardEffectContent" : "피해를 6 줍니다"
+        } ],
+        "energyCost" : 1,
+        "cardTarget" : [ "Monster" ]
+      }, {
+        "cardName" : "수비",
+        "cardType" : "Skill",
+        "cardEffectList" : [ {
+          "cardEffectType" : "BLOCK",
+          "cardEffectAmount" : 5,
+          "cardEffectContent" : "방어도를 5 얻습니다."
+        } ],
+        "energyCost" : 1,
+        "cardTarget" : [ "Character" ]
+      }, {
+        "cardName" : "수비",
+        "cardType" : "Skill",
+        "cardEffectList" : [ {
+          "cardEffectType" : "BLOCK",
+          "cardEffectAmount" : 5,
+          "cardEffectContent" : "방어도를 5 얻습니다."
+        } ],
+        "energyCost" : 1,
+        "cardTarget" : [ "Character" ]
+      }, {
+        "cardName" : "수비",
+        "cardType" : "Skill",
+        "cardEffectList" : [ {
+          "cardEffectType" : "BLOCK",
+          "cardEffectAmount" : 5,
+          "cardEffectContent" : "방어도를 5 얻습니다."
+        } ],
+        "energyCost" : 1,
+        "cardTarget" : [ "Character" ]
+      }, {
+        "cardName" : "수비",
+        "cardType" : "Skill",
+        "cardEffectList" : [ {
+          "cardEffectType" : "BLOCK",
+          "cardEffectAmount" : 5,
+          "cardEffectContent" : "방어도를 5 얻습니다."
+        } ],
+        "energyCost" : 1,
+        "cardTarget" : [ "Character" ]
+      }, {
+        "cardName" : "강타",
+        "cardType" : "Attack",
+        "cardEffectList" : [ {
+          "cardEffectType" : "DAMAGE",
+          "cardEffectAmount" : 8,
+          "cardEffectContent" : "피해를 8 줍니다."
+        }, {
+          "cardEffectType" : "VULNERABLE",
+          "cardEffectAmount" : 2,
+          "cardEffectContent" : "취약을 2 부여합니다."
+        } ],
+        "energyCost" : 2,
+        "cardTarget" : [ "Monster" ]
+      } ],
+      "handPile" : [ ],
+      "drawPile" : [ {
+        "cardName" : "수비",
+        "cardType" : "Skill",
+        "cardEffectList" : [ {
+          "cardEffectType" : "BLOCK",
+          "cardEffectAmount" : 5,
+          "cardEffectContent" : "방어도를 5 얻습니다."
+        } ],
+        "energyCost" : 1,
+        "cardTarget" : [ "Character" ]
+      }, {
+        "cardName" : "타격",
+        "cardType" : "Attack",
+        "cardEffectList" : [ {
+          "cardEffectType" : "DAMAGE",
+          "cardEffectAmount" : 6,
+          "cardEffectContent" : "피해를 6 줍니다"
+        } ],
+        "energyCost" : 1,
+        "cardTarget" : [ "Monster" ]
+      }, {
+        "cardName" : "타격",
+        "cardType" : "Attack",
+        "cardEffectList" : [ {
+          "cardEffectType" : "DAMAGE",
+          "cardEffectAmount" : 6,
+          "cardEffectContent" : "피해를 6 줍니다"
+        } ],
+        "energyCost" : 1,
+        "cardTarget" : [ "Monster" ]
+      }, {
+        "cardName" : "타격",
+        "cardType" : "Attack",
+        "cardEffectList" : [ {
+          "cardEffectType" : "DAMAGE",
+          "cardEffectAmount" : 6,
+          "cardEffectContent" : "피해를 6 줍니다"
+        } ],
+        "energyCost" : 1,
+        "cardTarget" : [ "Monster" ]
+      }, {
+        "cardName" : "수비",
+        "cardType" : "Skill",
+        "cardEffectList" : [ {
+          "cardEffectType" : "BLOCK",
+          "cardEffectAmount" : 5,
+          "cardEffectContent" : "방어도를 5 얻습니다."
+        } ],
+        "energyCost" : 1,
+        "cardTarget" : [ "Character" ]
+      }, {
+        "cardName" : "수비",
+        "cardType" : "Skill",
+        "cardEffectList" : [ {
+          "cardEffectType" : "BLOCK",
+          "cardEffectAmount" : 5,
+          "cardEffectContent" : "방어도를 5 얻습니다."
+        } ],
+        "energyCost" : 1,
+        "cardTarget" : [ "Character" ]
+      }, {
+        "cardName" : "타격",
+        "cardType" : "Attack",
+        "cardEffectList" : [ {
+          "cardEffectType" : "DAMAGE",
+          "cardEffectAmount" : 6,
+          "cardEffectContent" : "피해를 6 줍니다"
+        } ],
+        "energyCost" : 1,
+        "cardTarget" : [ "Monster" ]
+      }, {
+        "cardName" : "강타",
+        "cardType" : "Attack",
+        "cardEffectList" : [ {
+          "cardEffectType" : "DAMAGE",
+          "cardEffectAmount" : 8,
+          "cardEffectContent" : "피해를 8 줍니다."
+        }, {
+          "cardEffectType" : "VULNERABLE",
+          "cardEffectAmount" : 2,
+          "cardEffectContent" : "취약을 2 부여합니다."
+        } ],
+        "energyCost" : 2,
+        "cardTarget" : [ "Monster" ]
+      }, {
+        "cardName" : "타격",
+        "cardType" : "Attack",
+        "cardEffectList" : [ {
+          "cardEffectType" : "DAMAGE",
+          "cardEffectAmount" : 6,
+          "cardEffectContent" : "피해를 6 줍니다"
+        } ],
+        "energyCost" : 1,
+        "cardTarget" : [ "Monster" ]
+      }, {
+        "cardName" : "수비",
+        "cardType" : "Skill",
+        "cardEffectList" : [ {
+          "cardEffectType" : "BLOCK",
+          "cardEffectAmount" : 5,
+          "cardEffectContent" : "방어도를 5 얻습니다."
+        } ],
+        "energyCost" : 1,
+        "cardTarget" : [ "Character" ]
+      } ],
+      "discardPile" : [ ],
+      "temporaryPile" : [ ],
+      "exhaustedPile" : [ ],
+      "energy" : {
+        "currentEnergy" : 3,
+        "maxEnergy" : 3
+      },
+      "x" : 250,
+      "y" : 350,
+      "imagePath" : "src/imgs/ironclad.png",
+      "cardCount" : 5,
+      "statusEffects" : {
+        "Vulnerable" : 0,
+        "Strength" : 0,
+        "Weak" : 0,
+        "Block" : 0
+      }
+    },
+    "turnCount" : 1,
+    "floor" : 1,
+    "monsters" : [ {
+      "health" : {
+        "currentHealth" : 41,
+        "maxHealth" : 41
+      },
+      "type" : "WEAK",
+      "imagePath" : "src/imgs/jawWorm.png",
+      "damage" : 0,
+      "x" : 1000,
+      "y" : 350,
+      "statusEffects" : {
+        "Vulnerable" : 0,
+        "Strength" : 0,
+        "Weak" : 0,
+        "Block" : 0
+      },
+      "maxHealth" : 41,
+      "currentHealth" : 41
+    } ],
+    "killedMonsters" : 0,
+    "killedElites" : 0,
+    "killedBosses" : 0,
+    "myTurn" : true
+  }
+}

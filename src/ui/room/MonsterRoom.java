@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Collections;
@@ -14,12 +16,14 @@ import java.util.Random;
 import card.CardTarget;
 import card.CardType;
 import characterStatus.Health;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import gameEntity.characters.Character;
 import card.Card;
 import card.CardEffect;
 import characterStatus.Energy;
 import gameEntity.monsters.Monster;
 import gameEntity.monsters.weak.*;
+import json.SaveData;
 import statusEffect.StatusEffect;
 import ui.battleResult.GameOver;
 import ui.GameState;
@@ -264,6 +268,16 @@ public class MonsterRoom extends JPanel implements ActionListener {
 
             revalidate(); // 레이아웃 갱신
             repaint();    // 화면 다시 그리기
+
+            ObjectMapper mapper = new ObjectMapper();
+            SaveData saveData = new SaveData();
+            try {
+                File file = new File("saveData.json");
+                mapper.writerWithDefaultPrettyPrinter().writeValue(file, saveData);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+
         }
     }
 

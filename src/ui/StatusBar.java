@@ -3,14 +3,13 @@ package ui;
 import card.Card;
 import characterStatus.Health;
 import characterStatus.Potion;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import gameEntity.characters.Character;
 import javax.swing.*;
 import java.awt.*;
 import java.util.LinkedList;
 
 public class StatusBar extends JPanel {
-    private GameState gameState;
-    private Character character;
     private Health myHealth;
     private int myMoney;
     private LinkedList<Card> myDeck;
@@ -137,5 +136,21 @@ public class StatusBar extends JPanel {
         return floor;
     }
 
+    public int getMyMoney() {
+        return myMoney;
+    }
+
+    public Health getMyHealth() {
+        return myHealth;
+    }
+
+    public LinkedList<Card> getMyDeck() {
+        return myDeck;
+    }
+
+
+    public LinkedList<Potion> getMyPotions() {
+        return myPotions;
+    }
 
 }
